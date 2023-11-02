@@ -23,7 +23,7 @@
 
 Simple CLI tool that provides an interactive interface to quickly set priority, severity and story points for your JIRA issues. No need to open the JIRA web interface.
 
-StoryPointer uses base JQL query to fetch issues that are not closed and have no story points or priority set - `Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed`. The query can be customized using the CLI command options or by setting ENV variables.
+StoryPointer uses base JQL query to fetch issues that are not closed and have no story points or priority set - `Project in (RHEL, "RHEL Miscellaneous", Fedora) AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed`. The query can be customized using the CLI command options or by setting ENV variables.
 
 ## Usage
 
@@ -111,7 +111,7 @@ Size all issues of the `curl` component:
 storypointer -c curl
 
 JIRA Version: 9.12.10
-JQL: Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND  ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND component = curl ORDER BY id DESC
+JQL: Project in (RHEL, "RHEL Miscellaneous", Fedora) AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND  ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND component = curl ORDER BY id DESC
 5 issues are waiting to be sized, prioritized, or set severity.
 
 🐛 RHEL-1234 - In Progress - Assignee
