@@ -93,7 +93,7 @@ describe('Jira functions', () => {
   it('can be instantiated', () => {
     expect(jira).toBeInstanceOf(Jira);
     expect(jira.baseJQL).toMatchInlineSnapshot(
-      `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed"`
+      `"Project in (RHEL, "RHEL Miscellaneous", Fedora) AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed"`
     );
   });
 
@@ -173,7 +173,7 @@ describe('Jira functions', () => {
       undefined
     );
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed ORDER BY id DESC"`
+      `"Project in (RHEL, "RHEL Miscellaneous", Fedora) AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed ORDER BY id DESC"`
     );
     expect(mocks.searchForIssuesUsingJqlPost).toHaveBeenCalledWith({
       fields: [
@@ -186,7 +186,7 @@ describe('Jira functions', () => {
         'customfield_12310243',
         'priority',
       ],
-      jql: 'Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed ORDER BY id DESC',
+      jql: 'Project in (RHEL, "RHEL Miscellaneous", Fedora) AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed ORDER BY id DESC',
     });
     expect(issues).toMatchInlineSnapshot(`
       [
@@ -239,7 +239,7 @@ describe('Jira functions', () => {
       undefined
     );
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND component = "component" ORDER BY id DESC"`
+      `"Project in (RHEL, "RHEL Miscellaneous", Fedora) AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND component = "component" ORDER BY id DESC"`
     );
 
     issues = await jira.getIssues(
@@ -250,7 +250,7 @@ describe('Jira functions', () => {
       undefined
     );
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND component = "component" AND assignee = "assignee" ORDER BY id DESC"`
+      `"Project in (RHEL, "RHEL Miscellaneous", Fedora) AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND component = "component" AND assignee = "assignee" ORDER BY id DESC"`
     );
 
     issues = await jira.getIssues(
@@ -261,7 +261,7 @@ describe('Jira functions', () => {
       'team'
     );
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND component = "component" AND assignee = "assignee" AND developer = "developer" AND AssignedTeam = "team" ORDER BY id DESC"`
+      `"Project in (RHEL, "RHEL Miscellaneous", Fedora) AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND component = "component" AND assignee = "assignee" AND developer = "developer" AND AssignedTeam = "team" ORDER BY id DESC"`
     );
 
     issues = await jira.getIssues(
@@ -272,7 +272,7 @@ describe('Jira functions', () => {
       undefined
     );
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND customJQL ORDER BY id DESC"`
+      `"Project in (RHEL, "RHEL Miscellaneous", Fedora) AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND customJQL ORDER BY id DESC"`
     );
 
     issues = await jira.getIssues(
@@ -283,7 +283,7 @@ describe('Jira functions', () => {
       '!team'
     );
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND customJQL AND assignee != "assignee" AND developer = "developer" AND AssignedTeam != "team" ORDER BY id DESC"`
+      `"Project in (RHEL, "RHEL Miscellaneous", Fedora) AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND customJQL AND assignee != "assignee" AND developer = "developer" AND AssignedTeam != "team" ORDER BY id DESC"`
     );
   });
 
