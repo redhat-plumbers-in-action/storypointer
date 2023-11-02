@@ -122,7 +122,7 @@ const runProgram = async () => {
       ? argsParsed.data
       : raise('Invalid issue key.');
 
-    const issues =
+    issues =
       args.length > 0
         ? await jira.getIssuesByID(args)
         : await jira.getIssues(
