@@ -48,12 +48,11 @@ export class Jira {
   }
 
   async getIssues(component: string, assignee?: string) {
-    const dynamicQuery = assignee
-      ? `component = ${component} AND assignee = "${assignee}"`
-      : `component = ${component}`;
+    const assigneeQuery = assignee ? `AND assignee = "${assignee}"` : '';
+    const componentQuery = component ? `AND component = ${component}` : '';
 
     const response = await this.api.issueSearch.searchForIssuesUsingJqlPost({
-      jql: `${this.baseJQL} AND ${dynamicQuery} ORDER BY id DESC`,
+      jql: `${this.baseJQL} ${assigneeQuery} ${componentQuery} ORDER BY id DESC`,
       fields: [
         'id',
         'issuetype',
