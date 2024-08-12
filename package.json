@@ -1,6 +1,6 @@
 {
   "name": "storypointer",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Small CLI tool to set JIRA Story Points and Priority",
   "main": "src/main.ts",
   "type": "commonjs",
@@ -27,6 +27,12 @@
     "url": "https://github.com/redhat-plumbers-in-action/storypointer/issues"
   },
   "homepage": "https://github.com/redhat-plumbers-in-action/storypointer#readme",
+  "keywords": [
+    "cli",
+    "jira",
+    "storypoints",
+    "priority"
+  ],
   "dependencies": {
     "@inquirer/select": "^2.4.7",
     "@total-typescript/ts-reset": "^0.5.1",
