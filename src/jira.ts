@@ -82,4 +82,8 @@ export class Jira {
       },
     });
   }
+
+  getIssueURL(issue: string) {
+    return `${this.instance}/browse/${issue}`;
+  }
 }
