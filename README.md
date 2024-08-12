@@ -25,6 +25,13 @@ Simple CLI tool that provides interactive interface to quicly set priority and s
 
 ## Usage
 
+Make sure to store your JIRA Personal Access Token (PAT) in the `~/.env.storypointer` file:
+
+```bash
+# ~/.env.storypointer
+JIRA_API_TOKEN="exaple-token"
+```
+
 ### Using Node.js
 
 ```bash
@@ -43,6 +50,10 @@ storypointer
 > The Fedora package is not available yet.
 
 ## How to use
+
+> [!IMPORTANT]
+>
+> This tool is intended to be used by Red Hat employees on the Red Hat JIRA instance. It may be adapted to work with other JIRA instances in the future.
 
 ```bash
 $ storypointer --help
@@ -81,3 +92,5 @@ Add new feature to curl
   8
   13
 ```
+
+You can use the arrow keys to select the story points and press `Enter` to confirm. Then you can select the priority. You can exit the tool by pressing `Ctrl+C` or selecting the `Exit` option.
