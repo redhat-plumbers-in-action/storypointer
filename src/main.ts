@@ -61,7 +61,7 @@ const cli = async () => {
   const issues =
     args.length > 0
       ? await jira.getIssuesByID(args)
-      : await jira.getIssues(options.component);
+      : await jira.getIssues(options.component, options.assignee);
 
   const numberOfIssues = issues.length;
 
