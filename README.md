@@ -71,6 +71,10 @@ Options:
   -h, --help                   display help for command
 ```
 
+> [!NOTE]
+>
+> Only `50` issues are fetched from JIRA at a time. If you want to triage more than `50` issues just run the command again.
+
 ### Examples
 
 Size all issues of the `curl` component:
