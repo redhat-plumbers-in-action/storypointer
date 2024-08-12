@@ -66,7 +66,7 @@ Arguments:
 
 Options:
   -V, --version                output the version number
-  -c, --component <component>  Issue component (default: "systemd")
+  -c, --component [component]  Issue component
   -a, --assignee [assignee]    Issue assignee
   -h, --help                   display help for command
 ```

@@ -38,7 +38,7 @@ const cli = async () => {
     .version('1.0.0');
 
   program
-    .option('-c, --component <component>', 'Issue component', 'systemd')
+    .option('-c, --component [component]', 'Issue component')
     .option('-a, --assignee [assignee]', 'Issue assignee');
 
   program.argument('[string]', 'Issue keys separated by `␣`');
