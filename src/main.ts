@@ -2,13 +2,14 @@
 import chalk from 'chalk';
 import { Command } from 'commander';
 import select, { Separator } from '@inquirer/select';
+import path from 'path';
 import { z } from 'zod';
 
-import 'dotenv/config';
+import dotenv from 'dotenv';
 import '@total-typescript/ts-reset';
 
 import { Jira } from './jira';
-import { raise } from './util';
+import { raise, tokenUnavailable } from './util';
 import {
   colorPrioritySchema,
   colorSizeSchema,
@@ -20,6 +21,13 @@ import {
   Size,
   SizeWithExit,
 } from './schema/jira';
+
+dotenv.config({
+  path: [
+    `${path.resolve(process.cwd(), '.env.storypointer')}`,
+    `${path.resolve(process.cwd(), '.env')}`,
+  ],
+});
 
 const cli = async () => {
   const program = new Command();
@@ -37,7 +45,7 @@ const cli = async () => {
 
   program.parse();
 
-  const token = process.env.JIRA_API_TOKEN ?? raise('JIRA_API_TOKEN not set.');
+  const token = process.env.JIRA_API_TOKEN ?? tokenUnavailable();
   const jira = new Jira('https://issues.redhat.com', token);
 
   const version = await jira.getVersion();
