@@ -88,6 +88,7 @@ JIRA Version: 9.12.10
 
 🐛 RHEL-1234 - In Progress - Assignee
 Add new feature to curl
+See more: https://issues.redhat.com/browse/RHEL-1234
 
 ? Story Points
   1

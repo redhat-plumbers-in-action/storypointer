@@ -78,7 +78,10 @@ const cli = async () => {
     console.log(
       `\n${issueTypeSchema.parse(issue.fields.issuetype.name)} ${issue.key} - ${chalk.bold(issueStatusSchema.parse(issue.fields.status.name))} - ${chalk.italic(issue.fields.assignee?.displayName)}`
     );
-    console.log(`${chalk.italic(issue.fields.summary)}\n`);
+    console.log(`${chalk.italic(issue.fields.summary)}`);
+    console.log(
+      `See more: ${chalk.italic.underline(jira.getIssueURL(issue.key))}\n`
+    );
 
     let storyPoints: Size = issue.fields[jira.fields.storyPoints];
     if (!storyPoints) {
