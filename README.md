@@ -55,7 +55,7 @@ storypointer
 >
 > This tool is intended to be used by Red Hat employees on the Red Hat JIRA instance. It may be adapted to work with other JIRA instances in the future.
 
-```bash
+```md
 $ storypointer --help
 Usage: storypointer [options] [string]
 
@@ -68,6 +68,7 @@ Options:
   -V, --version                output the version number
   -c, --component [component]  Issue component
   -a, --assignee [assignee]    Issue assignee
+  -d, --developer [developer]  Issue developer
   -h, --help                   display help for command
 ```
 
@@ -79,7 +80,7 @@ Options:
 
 Size all issues of the `curl` component:
 
-```bash
+```md
 storypointer -c curl
 # output:
 JIRA Version: 9.12.10

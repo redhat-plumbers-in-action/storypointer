@@ -39,7 +39,8 @@ const cli = async () => {
 
   program
     .option('-c, --component [component]', 'Issue component')
-    .option('-a, --assignee [assignee]', 'Issue assignee');
+    .option('-a, --assignee [assignee]', 'Issue assignee')
+    .option('-d, --developer [developer]', 'Issue developer');
 
   program.argument('[string]', 'Issue keys separated by `␣`');
 
@@ -61,7 +62,11 @@ const cli = async () => {
   const issues =
     args.length > 0
       ? await jira.getIssuesByID(args)
-      : await jira.getIssues(options.component, options.assignee);
+      : await jira.getIssues(
+          options.component,
+          options.assignee,
+          options.developer
+        );
 
   const numberOfIssues = issues.length;
 

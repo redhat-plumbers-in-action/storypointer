@@ -47,12 +47,17 @@ export class Jira {
     return response.issues ?? raise('Jira.getIssuesByID(): missing issues.');
   }
 
-  async getIssues(component: string, assignee?: string) {
-    const assigneeQuery = assignee ? `AND assignee = "${assignee}"` : '';
+  async getIssues(
+    component: string | undefined,
+    assignee: string | undefined,
+    developer: string | undefined
+  ) {
     const componentQuery = component ? `AND component = ${component}` : '';
+    const assigneeQuery = assignee ? `AND assignee = "${assignee}"` : '';
+    const developerQuery = developer ? `AND developer = "${developer}"` : '';
 
     const response = await this.api.issueSearch.searchForIssuesUsingJqlPost({
-      jql: `${this.baseJQL} ${assigneeQuery} ${componentQuery} ORDER BY id DESC`,
+      jql: `${this.baseJQL} ${componentQuery} ${assigneeQuery} ${developerQuery} ORDER BY id DESC`,
       fields: [
         'id',
         'issuetype',
