@@ -96,6 +96,9 @@ Add new feature to curl
   5
   8
   13
+ ---
+  SKIP
+  EXIT
 ```
 
 You can use the arrow keys to select the story points and press `Enter` to confirm. Then you can select the priority. You can exit the tool by pressing `Ctrl+C` or selecting the `Exit` option.
