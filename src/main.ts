@@ -17,9 +17,9 @@ import {
   issueStatusSchema,
   issueTypeSchema,
   prioritySchema,
-  PriorityWithExit,
+  PriorityWithControls,
   Size,
-  SizeWithExit,
+  SizeWithControls,
 } from './schema/jira';
 
 dotenv.config({
@@ -77,7 +77,7 @@ const cli = async () => {
 
     let storyPoints: Size = issue.fields[jira.fields.storyPoints];
     if (!storyPoints) {
-      const answer: SizeWithExit = await select({
+      const answer: SizeWithControls = await select({
         message: 'Story Points',
         choices: [
           {
@@ -106,6 +106,10 @@ const cli = async () => {
           },
           new Separator('---'),
           {
+            name: 'SKIP',
+            value: 0,
+          },
+          {
             name: 'EXIT',
             value: -1,
           },
@@ -113,6 +117,10 @@ const cli = async () => {
         default: 3,
         loop: false,
       });
+
+      if (answer === 0) {
+        continue;
+      }
 
       if (answer === -1) {
         process.exit(0);
@@ -127,7 +135,7 @@ const cli = async () => {
     );
     let priority = parsedPriority.success ? parsedPriority.data : undefined;
     if (!priority) {
-      const answer: PriorityWithExit = await select({
+      const answer: PriorityWithControls = await select({
         message: 'Priority',
         choices: [
           {
@@ -152,6 +160,10 @@ const cli = async () => {
           },
           new Separator(),
           {
+            name: 'SKIP',
+            value: '0',
+          },
+          {
             name: 'EXIT',
             value: '-1',
           },
@@ -159,6 +171,10 @@ const cli = async () => {
         default: 'Normal',
         loop: false,
       });
+
+      if (answer === '0') {
+        continue;
+      }
 
       if (answer === '-1') {
         process.exit(0);

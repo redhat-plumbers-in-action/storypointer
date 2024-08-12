@@ -30,7 +30,7 @@ export const colorSizeSchema = sizeSchema.transform(val => {
 });
 
 export type Size = z.infer<typeof sizeSchema>;
-export type SizeWithExit = Size | -1;
+export type SizeWithControls = Size | 0 | -1;
 
 export const prioritySchema = z.union([
   z.literal('Blocker'), // red bold
@@ -56,7 +56,7 @@ export const colorPrioritySchema = prioritySchema.transform(val => {
 });
 
 export type Priority = z.infer<typeof prioritySchema>;
-export type PriorityWithExit = Priority | '-1';
+export type PriorityWithControls = Priority | '0' | '-1';
 
 export const issueIdSchema = z.string().regex(/^RHEL-\d+$/);
 
