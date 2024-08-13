@@ -11,7 +11,6 @@ URL:      https://github.com/redhat-plumbers-in-action/storypointer
 Source:   https://registry.npmjs.org/%{npm_name}/-/%{npm_name}-%{version}.tgz
 
 BuildRequires: nodejs-devel
-BuildRequires: yarnpkg
 
 %global _description %{expand:
 Simple CLI tool that provides an interactive interface to quickly set priority and story points for your JIRA issues.}
@@ -26,17 +25,14 @@ License:  0BSD AND BSD-2-Clause AND GPL-3.0-or-later AND ISC AND MIT AND (MIT OR
 
 %files
 %doc README.md
-%license LICENSE %{npm_name}-bundled-licenses.txt
+%license LICENSE LICENSE-BUNDLED
 %{nodejs_sitelib}/%{npm_name}
 %{_bindir}/%{npm_name}
 
 %prep
 %setup -q -n package
-mv rpm/%{npm_name}-bundled-licenses.txt .
 
 %build
-yarn install
-yarn build
 
 %install
 mkdir -p %{buildroot}%{nodejs_sitelib}/%{npm_name}/bin
