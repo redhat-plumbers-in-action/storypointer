@@ -80,6 +80,8 @@ web_modules/
 .env.local
 .env.storypointer
 
+.config
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
