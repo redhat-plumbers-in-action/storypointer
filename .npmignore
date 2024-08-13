@@ -5,7 +5,7 @@
 /tsconfig.*
 /test
 
-nodejs-storypointer.spec
+/rpm
 
 *.tsbuildinfo
 .*

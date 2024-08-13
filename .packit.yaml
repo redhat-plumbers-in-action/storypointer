@@ -12,6 +12,13 @@ files_to_sync:
 upstream_package_name: storypointer
 downstream_package_name: nodejs-storypointer
 
+actions:
+  prepare-files:
+    - npm install -g corepack
+    - corepack install
+    - yarn install
+    - yarn build
+
 jobs:
   - &copr
     job: copr_build
