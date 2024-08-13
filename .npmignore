@@ -5,5 +5,7 @@
 /tsconfig.*
 /test
 
+nodejs-storypointer.spec
+
 *.tsbuildinfo
 .*

@@ -1,0 +1,6 @@
+"0BSD"
+"BSD-2-Clause"
+"GPL-3.0+"
+"ISC"
+"MIT"
+"(MIT OR CC0-1.0)"
