@@ -21,7 +21,7 @@
 
 ## Description
 
-Simple CLI tool that provides interactive interface to quicly set priority and story points for your JIRA issues. No need to open JIRA web interface.
+Simple CLI tool that provides an interactive interface to quickly set priority and story points for your JIRA issues. No need to open the JIRA web interface.
 
 ## Usage
 
