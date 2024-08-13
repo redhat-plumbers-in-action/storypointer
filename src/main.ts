@@ -24,6 +24,7 @@ import {
 
 dotenv.config({
   path: [
+    `${path.resolve(process.cwd(), '.config', 'storypointer', '.env')}`,
     `${path.resolve(process.cwd(), '.env.storypointer')}`,
     `${path.resolve(process.cwd(), '.env')}`,
   ],

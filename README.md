@@ -25,10 +25,10 @@ Simple CLI tool that provides an interactive interface to quickly set priority a
 
 ## Usage
 
-Make sure to store your JIRA Personal Access Token (PAT) in the `~/.env.storypointer` file:
+Make sure to store your JIRA Personal Access Token (PAT) in the `~/.config/storypointer/.env` or `~/.env.storypointer` file:
 
 ```bash
-# ~/.env.storypointer
+# ~/.config/storypointer/.env
 JIRA_API_TOKEN="exaple-token"
 ```
 
