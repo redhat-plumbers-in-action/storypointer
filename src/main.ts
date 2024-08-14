@@ -205,11 +205,6 @@ const cli = async () => {
     );
     await jira.setValues(issue.key, priority, storyPoints);
   }
-
-  // loop through issues and ask for story points and priority
-  //? allow to end at any time
-
-  //? print statistics
 };
 
 try {
