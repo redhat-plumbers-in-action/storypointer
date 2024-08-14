@@ -69,6 +69,7 @@ Options:
   -c, --component [component]  Issue component
   -a, --assignee [assignee]    Issue assignee
   -d, --developer [developer]  Issue developer
+  -l, --legend                 Print legend
   -h, --help                   display help for command
 ```
 
@@ -82,7 +83,7 @@ Size all issues of the `curl` component:
 
 ```md
 storypointer -c curl
-# output:
+
 JIRA Version: 9.12.10
 5 issues are waiting to be sized and prioritized.
 
