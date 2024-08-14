@@ -10,7 +10,7 @@ import '@total-typescript/ts-reset';
 
 import { Jira } from './jira';
 import { getLegend } from './legend';
-import { getOptions, raise, tokenUnavailable } from './util';
+import { getDefaultValue, getOptions, raise, tokenUnavailable } from './util';
 
 import {
   colorPrioritySchema,
@@ -41,9 +41,21 @@ const cli = async () => {
     .version('1.0.0');
 
   program
-    .option('-c, --component [component]', 'Issue component')
-    .option('-a, --assignee [assignee]', 'Issue assignee')
-    .option('-d, --developer [developer]', 'Issue developer')
+    .option(
+      '-c, --component [component]',
+      'Issue component',
+      getDefaultValue('COMPONENT')
+    )
+    .option(
+      '-a, --assignee [assignee]',
+      'Issue assignee',
+      getDefaultValue('ASSIGNEE')
+    )
+    .option(
+      '-d, --developer [developer]',
+      'Issue developer',
+      getDefaultValue('DEVELOPER')
+    )
     .option('-l, --legend', 'Print legend');
 
   program.argument('[string]', 'Issue keys separated by `␣`');

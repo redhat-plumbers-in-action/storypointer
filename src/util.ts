@@ -1,4 +1,6 @@
 import { OptionValues } from 'commander';
+import os from 'os';
+import { env } from 'process';
 
 export function raise(error: string): never {
   throw new Error(error);
@@ -10,10 +12,21 @@ export function tokenUnavailable(): never {
   );
 }
 
+export function getUserFromLogin(): string {
+  const login = os.userInfo().username;
+  return `${login}@redhat.com`;
+}
+
 export function getDefaultValue(
   envName: 'ASSIGNEE' | 'COMPONENT' | 'DEVELOPER'
 ) {
-  return process.env[envName];
+  const value = process.env[envName];
+
+  if (envName === 'ASSIGNEE' && !value) {
+    return getUserFromLogin();
+  }
+
+  return value;
 }
 
 export function getOptions(inputs: OptionValues): OptionValues {
