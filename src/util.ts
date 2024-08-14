@@ -1,6 +1,5 @@
 import { OptionValues } from 'commander';
 import os from 'os';
-import { env } from 'process';
 
 export function raise(error: string): never {
   throw new Error(error);
