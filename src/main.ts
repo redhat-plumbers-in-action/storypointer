@@ -9,7 +9,9 @@ import dotenv from 'dotenv';
 import '@total-typescript/ts-reset';
 
 import { Jira } from './jira';
+import { getLegend } from './legend';
 import { raise, tokenUnavailable } from './util';
+
 import {
   colorPrioritySchema,
   colorSizeSchema,
@@ -41,19 +43,25 @@ const cli = async () => {
   program
     .option('-c, --component [component]', 'Issue component')
     .option('-a, --assignee [assignee]', 'Issue assignee')
-    .option('-d, --developer [developer]', 'Issue developer');
+    .option('-d, --developer [developer]', 'Issue developer')
+    .option('-l, --legend', 'Print legend');
 
   program.argument('[string]', 'Issue keys separated by `␣`');
 
   program.parse();
+
+  const options = program.opts();
+
+  if (options.legend) {
+    console.log(getLegend());
+    process.exit(0);
+  }
 
   const token = process.env.JIRA_API_TOKEN ?? tokenUnavailable();
   const jira = new Jira('https://issues.redhat.com', token);
 
   const version = await jira.getVersion();
   console.debug(`JIRA Version: ${version}`);
-
-  const options = program.opts();
 
   const argsParsed = z.array(issueIdSchema).safeParse(program.args);
   const args = argsParsed.success
