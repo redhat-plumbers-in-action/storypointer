@@ -78,7 +78,7 @@ Arguments:
 Options:
   -V, --version                output the version number
   -c, --component [component]  Issue component
-  -a, --assignee [assignee]    Issue assignee
+  -a, --assignee [assignee]    Issue assignee (default: "<user-login>@redhat.com")
   -d, --developer [developer]  Issue developer
   -l, --legend                 Print legend
   -h, --help                   display help for command
