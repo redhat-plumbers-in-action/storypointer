@@ -10,7 +10,7 @@ import '@total-typescript/ts-reset';
 
 import { Jira } from './jira';
 import { getLegend } from './legend';
-import { raise, tokenUnavailable } from './util';
+import { getOptions, raise, tokenUnavailable } from './util';
 
 import {
   colorPrioritySchema,
@@ -50,7 +50,7 @@ const cli = async () => {
 
   program.parse();
 
-  const options = program.opts();
+  const options = getOptions(program.opts());
 
   if (options.legend) {
     console.log(getLegend());

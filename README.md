@@ -32,6 +32,17 @@ Make sure to store your JIRA Personal Access Token (PAT) in the `~/.config/story
 JIRA_API_TOKEN="exaple-token"
 ```
 
+> [!TIP]
+>
+> You can also set default values for the `assignee`, `developer`, and `component` fields in the `~/.config/storypointer/.env` or `~/.env.storypointer` file:
+>
+> ```bash
+> # ~/.config/storypointer/.env
+> ASSIGNEE="your-jira-username"
+> DEVELOPER="your-jira-username"
+> COMPONENT="your-component"
+> ```
+
 ### Using Node.js
 
 ```bash
