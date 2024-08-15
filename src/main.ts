@@ -2,6 +2,7 @@
 import chalk from 'chalk';
 import { Command } from 'commander';
 import select, { Separator } from '@inquirer/select';
+import os from 'os';
 import path from 'path';
 import { z } from 'zod';
 
@@ -26,9 +27,10 @@ import {
 
 dotenv.config({
   path: [
-    `${path.resolve(process.cwd(), '.config', 'storypointer', '.env')}`,
-    `${path.resolve(process.cwd(), '.env.storypointer')}`,
     `${path.resolve(process.cwd(), '.env')}`,
+    `${path.resolve(os.homedir(), '.config', 'storypointer', '.env')}`,
+    `${path.resolve(os.homedir(), '.env.storypointer')}`,
+    `${path.resolve(os.homedir(), '.env')}`,
   ],
 });
 
