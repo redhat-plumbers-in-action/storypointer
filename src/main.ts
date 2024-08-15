@@ -91,6 +91,7 @@ const cli = async () => {
 
   const numberOfIssues = issues.length;
 
+  console.log(`JQL: ${chalk.dim(jira.JQL)}`);
   console.log(
     `${chalk.bold(numberOfIssues > 10 ? chalk.red(numberOfIssues) : chalk.yellow(numberOfIssues))} issues are waiting to be sized and prioritized.`
   );

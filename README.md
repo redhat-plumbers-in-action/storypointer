@@ -96,6 +96,7 @@ Size all issues of the `curl` component:
 storypointer -c curl
 
 JIRA Version: 9.12.10
+JQL: project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed AND component = curl ORDER BY id DESC
 5 issues are waiting to be sized and prioritized.
 
 🐛 RHEL-1234 - In Progress - Assignee
