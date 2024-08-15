@@ -11,6 +11,7 @@ export class Jira {
   };
   readonly baseJQL =
     'project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed';
+  JQL = '';
 
   constructor(
     readonly instance: string,
@@ -30,8 +31,10 @@ export class Jira {
   }
 
   async getIssuesByID(issues: string[]) {
+    this.JQL = `issue in (${issues.join(',')}) ORDER BY id DESC`;
+
     const response = await this.api.issueSearch.searchForIssuesUsingJqlPost({
-      jql: `issue in (${issues.join(',')}) ORDER BY id DESC`,
+      jql: this.JQL,
       fields: [
         'id',
         'issuetype',
@@ -56,8 +59,10 @@ export class Jira {
     const assigneeQuery = assignee ? `AND assignee = "${assignee}"` : '';
     const developerQuery = developer ? `AND developer = "${developer}"` : '';
 
+    this.JQL = `${this.baseJQL} ${componentQuery} ${assigneeQuery} ${developerQuery} ORDER BY id DESC`;
+
     const response = await this.api.issueSearch.searchForIssuesUsingJqlPost({
-      jql: `${this.baseJQL} ${componentQuery} ${assigneeQuery} ${developerQuery} ORDER BY id DESC`,
+      jql: this.JQL,
       fields: [
         'id',
         'issuetype',
