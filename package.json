@@ -1,6 +1,6 @@
 {
   "name": "storypointer",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Small CLI tool to set JIRA Story Points and Priority",
   "main": "src/main.ts",
   "type": "commonjs",
