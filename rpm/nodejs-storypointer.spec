@@ -2,7 +2,7 @@
 %global npm_name storypointer
 
 Name:     nodejs-%{npm_name}
-Version:  1.5.0
+Version:  1.5.1
 Release:  %autorelease
 Summary:  Simple CLI tool to set JIRA Story Points and Priority 
 
