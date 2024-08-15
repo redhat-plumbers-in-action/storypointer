@@ -23,7 +23,6 @@ export function isDefaultValuesDisabled(): boolean {
 export function getDefaultValue(
   envName: 'ASSIGNEE' | 'COMPONENT' | 'DEVELOPER'
 ) {
-  console.log(`isDisabled: ${isDefaultValuesDisabled()}`);
   if (isDefaultValuesDisabled()) {
     return undefined;
   }
