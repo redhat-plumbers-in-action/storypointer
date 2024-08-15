@@ -16,9 +16,18 @@ export function getUserFromLogin(): string {
   return `${login}@redhat.com`;
 }
 
+export function isDefaultValuesDisabled(): boolean {
+  return process.env['NODEFAULTS'] ? true : false;
+}
+
 export function getDefaultValue(
   envName: 'ASSIGNEE' | 'COMPONENT' | 'DEVELOPER'
 ) {
+  console.log(`isDisabled: ${isDefaultValuesDisabled()}`);
+  if (isDefaultValuesDisabled()) {
+    return undefined;
+  }
+
   const value = process.env[envName];
 
   if (envName === 'ASSIGNEE' && !value) {

@@ -88,6 +88,14 @@ Options:
 >
 > Only `50` issues are fetched from JIRA at a time. If you want to triage more than `50` issues just run the command again.
 
+> [!TIP]
+>
+> You can disable default values by setting `NODEFAULTS` environment variable to `true`:
+>
+> ```bash
+> NODEFAULTS=true npx storypointer
+> ```
+
 ### Examples
 
 Size all issues of the `curl` component:
