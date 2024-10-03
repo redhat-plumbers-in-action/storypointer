@@ -163,9 +163,10 @@ const cli = async () => {
 
     // NOTE: undefined priority is value "Undefined" so we need to check for it
     const parsedPriority = prioritySchema.safeParse(
-      issue.fields[jira.fields.priority]
+      issue.fields[jira.fields.priority].name
     );
     let priority = parsedPriority.success ? parsedPriority.data : undefined;
+
     if (!priority) {
       const answer: PriorityWithControls = await select({
         message: 'Priority',
