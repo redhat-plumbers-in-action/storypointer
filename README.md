@@ -54,12 +54,6 @@ npm install -g storypointer
 storypointer
 ```
 
-### Using Fedora
-
-> [!IMPORTANT]
->
-> The Fedora package is not available yet.
-
 ## How to use
 
 > [!IMPORTANT]
