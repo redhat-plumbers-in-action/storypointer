@@ -108,6 +108,8 @@ const cli = async () => {
     );
 
     let storyPoints: Size = issue.fields[jira.fields.storyPoints];
+    const setStoryPoints = !storyPoints;
+
     if (!storyPoints) {
       const answer: SizeWithControls = await select({
         message: 'Story Points',
@@ -166,6 +168,7 @@ const cli = async () => {
       issue.fields[jira.fields.priority].name
     );
     let priority = parsedPriority.success ? parsedPriority.data : undefined;
+    const setPriority = !priority;
 
     if (!priority) {
       const answer: PriorityWithControls = await select({
@@ -216,9 +219,21 @@ const cli = async () => {
       priority = answer;
     }
 
-    console.log(
-      `Setting priority to ${priority} and story points to ${storyPoints}`
-    );
+    // If both values are already set, skip setting them
+    if (!setStoryPoints && !setPriority) {
+      console.log('Both values are already set. Skipping.');
+      continue;
+    }
+
+    const message = [];
+    if (setStoryPoints) {
+      message.push(`story points to ${storyPoints}`);
+    }
+    if (setPriority) {
+      message.push(`priority to ${priority}`);
+    }
+
+    console.log(`Setting ${message.join(' and ')}`);
     await jira.setValues(issue.key, priority, storyPoints);
   }
 };
