@@ -1,9 +1,72 @@
-import { describe, expect, test } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { raise } from '../../src/util';
+import {
+  getDefaultValue,
+  getOptions,
+  getUserFromLogin,
+  isDefaultValuesDisabled,
+  raise,
+  tokenUnavailable,
+} from '../../src/util';
+
+const mocks = vi.hoisted(() => {
+  return {
+    os: {
+      userInfo: vi.fn(),
+    },
+  };
+});
+
+vi.mock('node:os', () => {
+  return {
+    default: mocks.os,
+  };
+});
 
 describe('Utility functions', () => {
+  beforeEach(async () => {
+    mocks.os.userInfo.mockReturnValue({
+      username: 'username',
+    });
+  });
+
+  afterEach(async () => {
+    vi.restoreAllMocks();
+    vi.unstubAllEnvs();
+  });
+
   test('raise()', () => {
     expect(() => raise('error')).toThrow('error');
+  });
+
+  test('tokenUnavailable()', () => {
+    expect(() => tokenUnavailable()).toThrowErrorMatchingInlineSnapshot(`
+      [Error: JIRA_API_TOKEN not set.
+      Please set the JIRA_API_TOKEN environment variable in '~/.config/storypointer/.env' or '~/.env.storypointer' or '~/.env.']
+    `);
+  });
+
+  test(`getUserFromLogin()`, () => {
+    expect(getUserFromLogin()).toMatchInlineSnapshot(`"username@redhat.com"`);
+  });
+
+  test(`isDefaultValuesDisabled()`, () => {
+    expect(isDefaultValuesDisabled()).toBe(false);
+    vi.stubEnv('NODEFAULTS', 'true');
+    expect(isDefaultValuesDisabled()).toBe(true);
+  });
+
+  test(`getOptions()`, () => {
+    vi.stubEnv('ASSIGNEE', 'assignee');
+    vi.stubEnv('COMPONENT', 'component');
+    vi.stubEnv('DEVELOPER', 'developer');
+
+    expect(getOptions({})).toMatchInlineSnapshot(`
+      {
+        "assignee": "assignee",
+        "component": "component",
+        "developer": "developer",
+      }
+    `);
   });
 });
