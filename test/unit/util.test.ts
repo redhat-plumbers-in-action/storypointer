@@ -1,7 +1,6 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import {
-  getDefaultValue,
   getOptions,
   getUserFromLogin,
   isDefaultValuesDisabled,
@@ -57,15 +56,13 @@ describe('Utility functions', () => {
   });
 
   test(`getOptions()`, () => {
-    vi.stubEnv('ASSIGNEE', 'assignee');
     vi.stubEnv('COMPONENT', 'component');
-    vi.stubEnv('DEVELOPER', 'developer');
 
     expect(getOptions({})).toMatchInlineSnapshot(`
       {
-        "assignee": "assignee",
+        "assignee": "username@redhat.com",
         "component": "component",
-        "developer": "developer",
+        "developer": undefined,
       }
     `);
   });
