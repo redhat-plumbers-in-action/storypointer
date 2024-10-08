@@ -5,6 +5,7 @@ import { z } from 'zod';
 
 import { Jira } from './jira';
 import { getLegend } from './legend';
+import { Logger } from './logger';
 import { getDefaultValue, getOptions, raise, tokenUnavailable } from './util';
 
 import {
@@ -43,7 +44,12 @@ export function cli(): Command {
       'Issue developer',
       getDefaultValue('DEVELOPER')
     )
-    .option('-l, --legend', 'Print legend');
+    .option('-l, --legend', 'Print legend')
+    .option(
+      '-n, --nocolor',
+      'Disable color output',
+      getDefaultValue('NOCOLOR')
+    );
 
   program.argument('[string]', 'Issue keys separated by `␣`');
 
@@ -55,9 +61,10 @@ const runProgram = async () => {
   program.parse();
 
   const options = getOptions(program.opts());
+  const logger = new Logger(!!options.nocolor);
 
   if (options.legend) {
-    console.log(getLegend());
+    logger.log(getLegend());
     process.exit(0);
   }
 
@@ -83,17 +90,17 @@ const runProgram = async () => {
 
   const numberOfIssues = issues.length;
 
-  console.log(`JQL: ${chalk.dim(jira.JQL)}`);
-  console.log(
+  logger.log(`JQL: ${chalk.dim(jira.JQL)}`);
+  logger.log(
     `${chalk.bold(numberOfIssues > 10 ? chalk.red(numberOfIssues) : chalk.yellow(numberOfIssues))} issues are waiting to be sized and prioritized.`
   );
 
   for (const issue of issues) {
-    console.log(
+    logger.log(
       `\n${issueTypeSchema.parse(issue.fields.issuetype.name)} ${issue.key} - ${chalk.bold(issueStatusSchema.parse(issue.fields.status.name))} - ${chalk.italic(issue.fields.assignee?.displayName)}`
     );
-    console.log(`${chalk.italic(issue.fields.summary)}`);
-    console.log(
+    logger.log(`${chalk.italic(issue.fields.summary)}`);
+    logger.log(
       `See more: ${chalk.italic.underline(jira.getIssueURL(issue.key))}\n`
     );
 
@@ -211,7 +218,7 @@ const runProgram = async () => {
 
     // If both values are already set, skip setting them
     if (!setStoryPoints && !setPriority) {
-      console.log('Both values are already set. Skipping.');
+      logger.log('Both values are already set. Skipping.');
       continue;
     }
 
@@ -223,7 +230,7 @@ const runProgram = async () => {
       message.push(`priority to ${priority}`);
     }
 
-    console.log(`Setting ${message.join(' and ')}`);
+    logger.log(`Setting ${message.join(' and ')}`);
     await jira.setValues(issue.key, priority, storyPoints);
   }
 };

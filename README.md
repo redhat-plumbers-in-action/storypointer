@@ -34,7 +34,7 @@ JIRA_API_TOKEN="exaple-token"
 
 > [!TIP]
 >
-> You can also set default values for the `assignee`, `developer`, and `component` fields in the `~/.config/storypointer/.env` or `~/.env.storypointer` file:
+> You can also set default values for the `assignee`, `developer`, `component` and more in the `~/.config/storypointer/.env` or `~/.env.storypointer` file:
 >
 > ```bash
 > # ~/.config/storypointer/.env
@@ -75,6 +75,7 @@ Options:
   -a, --assignee [assignee]    Issue assignee (default: "<user-login>@redhat.com")
   -d, --developer [developer]  Issue developer
   -l, --legend                 Print legend
+  -n, --nocolor                Disable color output (default: false)
   -h, --help                   display help for command
 ```
 
@@ -89,6 +90,8 @@ Options:
 > ```bash
 > NODEFAULTS=true npx storypointer
 > ```
+>
+> Similarly, you can disable color output by setting the `NOCOLOR` environment variable to `true`.
 
 ### Examples
 
