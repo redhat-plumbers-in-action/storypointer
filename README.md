@@ -23,6 +23,8 @@
 
 Simple CLI tool that provides an interactive interface to quickly set priority and story points for your JIRA issues. No need to open the JIRA web interface.
 
+StoryPointer uses base JQL query to fetch issues that are not closed and have no story points or priority set - `("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed`. The query can be customized using the CLI command options or by setting ENV variables.
+
 ## Usage
 
 Make sure to store your JIRA Personal Access Token (PAT) in the `~/.config/storypointer/.env` or `~/.env.storypointer` file:
@@ -101,7 +103,7 @@ Size all issues of the `curl` component:
 storypointer -c curl
 
 JIRA Version: 9.12.10
-JQL: project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed AND component = curl ORDER BY id DESC
+JQL: ("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed AND component = curl ORDER BY id DESC
 5 issues are waiting to be sized and prioritized.
 
 🐛 RHEL-1234 - In Progress - Assignee
