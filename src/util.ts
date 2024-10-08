@@ -21,7 +21,7 @@ export function isDefaultValuesDisabled(): boolean {
 }
 
 export function getDefaultValue(
-  envName: 'ASSIGNEE' | 'COMPONENT' | 'DEVELOPER'
+  envName: 'ASSIGNEE' | 'COMPONENT' | 'DEVELOPER' | 'NOCOLOR'
 ) {
   if (isDefaultValuesDisabled()) {
     return undefined;
@@ -31,6 +31,10 @@ export function getDefaultValue(
 
   if (envName === 'ASSIGNEE' && !value) {
     return getUserFromLogin();
+  }
+
+  if (envName === 'NOCOLOR' && !value) {
+    return false;
   }
 
   return value;

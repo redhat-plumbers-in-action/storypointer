@@ -43,6 +43,7 @@ describe('CLI functions', () => {
       {
         "assignee": "username@redhat.com",
         "component": "component",
+        "nocolor": false,
       }
     `);
 
@@ -60,6 +61,7 @@ describe('CLI functions', () => {
         -a, --assignee [assignee]    Issue assignee (default: "username@redhat.com")
         -d, --developer [developer]  Issue developer
         -l, --legend                 Print legend
+        -n, --nocolor                Disable color output (default: false)
         -h, --help                   display help for command
       "
     `);
