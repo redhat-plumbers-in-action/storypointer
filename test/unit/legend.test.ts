@@ -1,12 +1,13 @@
 import { describe, expect, test } from 'vitest';
 
 import { getLegend } from '../../src/legend';
+import { Logger } from '../../src/logger';
 
 describe('Legend functions', () => {
   test(`getLegend()`, () => {
     // Replace ANSI color codes with empty string to make the snapshot more readable
     // also they not work no GitHub Actions runners
-    expect(getLegend().replace(/\[\d+m/gm, '')).toMatchInlineSnapshot(`
+    expect(getLegend().replace(Logger.colorRegex, '')).toMatchInlineSnapshot(`
       "
           Issue Legend:
 
