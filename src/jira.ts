@@ -10,7 +10,7 @@ export class Jira {
     priority: 'priority',
   };
   readonly baseJQL =
-    'project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed';
+    '("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed';
   JQL = '';
 
   constructor(

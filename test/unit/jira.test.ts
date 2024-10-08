@@ -93,7 +93,7 @@ describe('Jira functions', () => {
   it('can be instantiated', () => {
     expect(jira).toBeInstanceOf(Jira);
     expect(jira.baseJQL).toMatchInlineSnapshot(
-      `"project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed"`
+      `"("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed"`
     );
   });
 
@@ -166,7 +166,7 @@ describe('Jira functions', () => {
   test('getIssues()', async () => {
     let issues = await jira.getIssues(undefined, undefined, undefined);
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed    ORDER BY id DESC"`
+      `"("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed    ORDER BY id DESC"`
     );
     expect(mocks.searchForIssuesUsingJqlPost).toHaveBeenCalledWith({
       fields: [
@@ -178,7 +178,7 @@ describe('Jira functions', () => {
         'customfield_12310243',
         'priority',
       ],
-      jql: 'project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed    ORDER BY id DESC',
+      jql: '("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed    ORDER BY id DESC',
     });
     expect(issues).toMatchInlineSnapshot(`
       [
@@ -225,17 +225,17 @@ describe('Jira functions', () => {
 
     issues = await jira.getIssues('component', undefined, undefined);
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed AND component = component   ORDER BY id DESC"`
+      `"("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed AND component = component   ORDER BY id DESC"`
     );
 
     issues = await jira.getIssues('component', 'assignee', undefined);
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed AND component = component AND assignee = "assignee"  ORDER BY id DESC"`
+      `"("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed AND component = component AND assignee = "assignee"  ORDER BY id DESC"`
     );
 
     issues = await jira.getIssues('component', 'assignee', 'developer');
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed AND component = component AND assignee = "assignee" AND developer = "developer" ORDER BY id DESC"`
+      `"("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed AND component = component AND assignee = "assignee" AND developer = "developer" ORDER BY id DESC"`
     );
   });
 
