@@ -26,7 +26,7 @@ export function cli(): Command {
   program
     .name('storypointer')
     .description('📐 Small CLI tool to set JIRA Story Points and Priority ')
-    .version('1.0.0');
+    .version('1.6.1');
 
   program
     .option(
