@@ -56,12 +56,12 @@ export class Jira {
     developer: string | undefined,
     customJQL: string | undefined
   ) {
-    const componentQuery = component ? `AND component = ${component}` : '';
-    const assigneeQuery = assignee ? `AND assignee = "${assignee}"` : '';
-    const developerQuery = developer ? `AND developer = "${developer}"` : '';
-    const customJQLQuery = customJQL ? `AND ${customJQL}` : '';
-
-    this.JQL = `${this.baseJQL} ${customJQLQuery} ${componentQuery} ${assigneeQuery} ${developerQuery} ORDER BY id DESC`;
+    this.JQL = this.baseJQL;
+    this.JQL += customJQL ? ` AND ${customJQL}` : '';
+    this.JQL += component ? ` AND component = ${component}` : '';
+    this.JQL += assignee ? ` AND assignee = "${assignee}"` : '';
+    this.JQL += developer ? ` AND developer = "${developer}"` : '';
+    this.JQL += ' ORDER BY id DESC';
 
     const response = await this.api.issueSearch.searchForIssuesUsingJqlPost({
       jql: this.JQL,
