@@ -68,6 +68,7 @@ export const issueTypeSchema = z
     z.literal('Bug'),
     z.literal('Story'),
     z.literal('Epic'),
+    z.string(),
   ])
   .transform(val => {
     switch (val) {
@@ -91,6 +92,7 @@ export const issueStatusSchema = z
     z.literal('In Progress'),
     z.literal('Integration'),
     z.literal('Release Pending'),
+    z.string(),
   ])
   .transform(val => {
     switch (val) {
