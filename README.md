@@ -43,6 +43,7 @@ JIRA_API_TOKEN="exaple-token"
 > ASSIGNEE="your-jira-username"
 > DEVELOPER="your-jira-username"
 > COMPONENT="your-component"
+> JQL="your-jql-query"
 > ```
 
 ### Using Node.js
@@ -76,6 +77,7 @@ Options:
   -c, --component [component]  Issue component
   -a, --assignee [assignee]    Issue assignee (default: "<user-login>@redhat.com")
   -d, --developer [developer]  Issue developer
+  -j, --jql [jql]              JQL query
   -l, --legend                 Print legend
   -n, --nocolor                Disable color output (default: false)
   -h, --help                   display help for command
