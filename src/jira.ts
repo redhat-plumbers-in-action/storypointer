@@ -53,13 +53,15 @@ export class Jira {
   async getIssues(
     component: string | undefined,
     assignee: string | undefined,
-    developer: string | undefined
+    developer: string | undefined,
+    customJQL: string | undefined
   ) {
     const componentQuery = component ? `AND component = ${component}` : '';
     const assigneeQuery = assignee ? `AND assignee = "${assignee}"` : '';
     const developerQuery = developer ? `AND developer = "${developer}"` : '';
+    const customJQLQuery = customJQL ? `AND ${customJQL}` : '';
 
-    this.JQL = `${this.baseJQL} ${componentQuery} ${assigneeQuery} ${developerQuery} ORDER BY id DESC`;
+    this.JQL = `${this.baseJQL} ${customJQLQuery} ${componentQuery} ${assigneeQuery} ${developerQuery} ORDER BY id DESC`;
 
     const response = await this.api.issueSearch.searchForIssuesUsingJqlPost({
       jql: this.JQL,

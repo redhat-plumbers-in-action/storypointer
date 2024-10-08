@@ -44,6 +44,7 @@ export function cli(): Command {
       'Issue developer',
       getDefaultValue('DEVELOPER')
     )
+    .option('-j, --jql [jql]', 'JQL query', getDefaultValue('JQL'))
     .option('-l, --legend', 'Print legend')
     .option(
       '-n, --nocolor',
@@ -85,7 +86,8 @@ const runProgram = async () => {
       : await jira.getIssues(
           options.component,
           options.assignee,
-          options.developer
+          options.developer,
+          options.jql
         );
 
   const numberOfIssues = issues.length;

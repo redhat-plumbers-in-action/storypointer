@@ -60,6 +60,7 @@ describe('CLI functions', () => {
         -c, --component [component]  Issue component (default: "component")
         -a, --assignee [assignee]    Issue assignee (default: "username@redhat.com")
         -d, --developer [developer]  Issue developer
+        -j, --jql [jql]              JQL query
         -l, --legend                 Print legend
         -n, --nocolor                Disable color output (default: false)
         -h, --help                   display help for command
