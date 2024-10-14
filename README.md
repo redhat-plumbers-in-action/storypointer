@@ -57,6 +57,10 @@ npm install -g storypointer
 storypointer
 ```
 
+### Using RHEL Developer Toolbox
+
+StoryPointer is available as a module in [RHEL Developer Toolbox](https://gitlab.com/redhat/rhel/tools/rhel-developer-toolbox). StoryPointer module documentation is available [here](https://gitlab.com/redhat/rhel/tools/rhel-developer-toolbox/-/blob/main/doc/source/modules/storypointer.rst).
+
 ## How to use
 
 > [!IMPORTANT]
