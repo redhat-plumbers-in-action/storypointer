@@ -85,6 +85,33 @@ export const issueTypeSchema = z
     }
   });
 
+export const severitySchema = z
+  .union([
+    z.literal('Critical'), // bold red
+    z.literal('Important'), // yellow
+    z.literal('Moderate'),
+    z.literal('Low'), // green
+  ])
+  .optional();
+
+export const colorSeveritySchema = severitySchema.transform(val => {
+  switch (val) {
+    case 'Critical':
+      return chalk.red.bold(val);
+    case 'Important':
+      return chalk.yellow(val);
+    case 'Moderate':
+      return val;
+    case 'Low':
+      return chalk.green(val);
+    default:
+      return val;
+  }
+});
+
+export type Severity = z.infer<typeof severitySchema>;
+export type SeverityWithControls = Severity | '0' | '-1';
+
 export const issueStatusSchema = z
   .union([
     z.literal('New'),

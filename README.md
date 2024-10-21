@@ -21,9 +21,9 @@
 
 ## Description
 
-Simple CLI tool that provides an interactive interface to quickly set priority and story points for your JIRA issues. No need to open the JIRA web interface.
+Simple CLI tool that provides an interactive interface to quickly set priority, severity and story points for your JIRA issues. No need to open the JIRA web interface.
 
-StoryPointer uses base JQL query to fetch issues that are not closed and have no story points or priority set - `("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed`. The query can be customized using the CLI command options or by setting ENV variables.
+StoryPointer uses base JQL query to fetch issues that are not closed and have no story points or priority set - `Project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY) AND status != Closed`. The query can be customized using the CLI command options or by setting ENV variables.
 
 ## Usage
 

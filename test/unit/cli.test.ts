@@ -35,7 +35,7 @@ describe('CLI functions', () => {
 
     expect(program.name()).toBe('storypointer');
     expect(program.description()).toBe(
-      '📐 Small CLI tool to set JIRA Story Points and Priority '
+      '📐 Small CLI tool to set JIRA Story Points, Priority and Severity'
     );
 
     program.parse();
@@ -50,7 +50,7 @@ describe('CLI functions', () => {
     expect(program.helpInformation()).toMatchInlineSnapshot(`
       "Usage: storypointer [options] [string]
 
-      📐 Small CLI tool to set JIRA Story Points and Priority
+      📐 Small CLI tool to set JIRA Story Points, Priority and Severity
 
       Arguments:
         string                       Issue keys separated by \`␣\`
