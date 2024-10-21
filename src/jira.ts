@@ -1,16 +1,17 @@
 import { Version2Client } from 'jira.js';
 
 import { raise } from './util';
-import { Priority, Size } from './schema/jira';
+import { Priority, Severity, Size } from './schema/jira';
 
 export class Jira {
   readonly api: Version2Client;
   readonly fields = {
     storyPoints: 'customfield_12310243',
     priority: 'priority',
+    severity: 'customfield_12316142',
   };
   readonly baseJQL =
-    '("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed';
+    'Project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY) AND status != Closed';
   JQL = '';
 
   constructor(
@@ -80,12 +81,18 @@ export class Jira {
     return response.issues ?? raise('Jira.getIssues(): missing issues.');
   }
 
-  async setValues(issue: string, priority: Priority, size: Size) {
+  async setValues(
+    issue: string,
+    priority: Priority,
+    size: Size,
+    severity: Severity
+  ) {
     const response = await this.api.issues.editIssue({
       issueIdOrKey: issue,
       fields: {
         [this.fields.storyPoints]: size,
         [this.fields.priority]: { name: priority },
+        [this.fields.severity]: { value: severity },
       },
     });
   }

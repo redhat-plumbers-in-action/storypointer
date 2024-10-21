@@ -93,7 +93,7 @@ describe('Jira functions', () => {
   it('can be instantiated', () => {
     expect(jira).toBeInstanceOf(Jira);
     expect(jira.baseJQL).toMatchInlineSnapshot(
-      `"("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed"`
+      `"Project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY) AND status != Closed"`
     );
   });
 
@@ -171,7 +171,7 @@ describe('Jira functions', () => {
       undefined
     );
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed ORDER BY id DESC"`
+      `"Project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY) AND status != Closed ORDER BY id DESC"`
     );
     expect(mocks.searchForIssuesUsingJqlPost).toHaveBeenCalledWith({
       fields: [
@@ -183,7 +183,7 @@ describe('Jira functions', () => {
         'customfield_12310243',
         'priority',
       ],
-      jql: '("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed ORDER BY id DESC',
+      jql: 'Project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY) AND status != Closed ORDER BY id DESC',
     });
     expect(issues).toMatchInlineSnapshot(`
       [
@@ -230,7 +230,7 @@ describe('Jira functions', () => {
 
     issues = await jira.getIssues('component', undefined, undefined, undefined);
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed AND component = component ORDER BY id DESC"`
+      `"Project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY) AND status != Closed AND component = component ORDER BY id DESC"`
     );
 
     issues = await jira.getIssues(
@@ -240,7 +240,7 @@ describe('Jira functions', () => {
       undefined
     );
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed AND component = component AND assignee = "assignee" ORDER BY id DESC"`
+      `"Project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY) AND status != Closed AND component = component AND assignee = "assignee" ORDER BY id DESC"`
     );
 
     issues = await jira.getIssues(
@@ -250,22 +250,25 @@ describe('Jira functions', () => {
       undefined
     );
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed AND component = component AND assignee = "assignee" AND developer = "developer" ORDER BY id DESC"`
+      `"Project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY) AND status != Closed AND component = component AND assignee = "assignee" AND developer = "developer" ORDER BY id DESC"`
     );
 
     issues = await jira.getIssues(undefined, undefined, undefined, 'customJQL');
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"("Story Points" is EMPTY OR priority is EMPTY) AND status != Closed AND customJQL ORDER BY id DESC"`
+      `"Project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY) AND status != Closed AND customJQL ORDER BY id DESC"`
     );
   });
 
   test('setValues()', async () => {
-    await jira.setValues('RHEL-1234', 'Minor', 5);
+    await jira.setValues('RHEL-1234', 'Minor', 5, 'Moderate');
 
     expect(mocks.editIssue).toHaveBeenCalledWith({
       issueIdOrKey: 'RHEL-1234',
       fields: {
         customfield_12310243: 5,
+        customfield_12316142: {
+          value: 'Moderate',
+        },
         priority: {
           name: 'Minor',
         },

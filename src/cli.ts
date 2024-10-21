@@ -10,12 +10,15 @@ import { getDefaultValue, getOptions, raise, tokenUnavailable } from './util';
 
 import {
   colorPrioritySchema,
+  colorSeveritySchema,
   colorSizeSchema,
   issueIdSchema,
   issueStatusSchema,
   issueTypeSchema,
   prioritySchema,
   PriorityWithControls,
+  severitySchema,
+  SeverityWithControls,
   Size,
   SizeWithControls,
 } from './schema/jira';
@@ -25,7 +28,9 @@ export function cli(): Command {
 
   program
     .name('storypointer')
-    .description('📐 Small CLI tool to set JIRA Story Points and Priority ')
+    .description(
+      '📐 Small CLI tool to set JIRA Story Points, Priority and Severity'
+    )
     .version('1.6.1');
 
   program
@@ -218,9 +223,63 @@ const runProgram = async () => {
       priority = answer;
     }
 
+    console.log(issue.fields[jira.fields.severity]);
+
+    // Set severity
+    const parsedSeverity = severitySchema.safeParse(
+      issue.fields[jira.fields.severity]?.value
+    );
+    let severity = parsedSeverity.success ? parsedSeverity.data : undefined;
+    const setSeverity = !severity;
+
+    if (!severity) {
+      const answer: SeverityWithControls = await select({
+        message: 'Severity',
+        choices: [
+          {
+            name: colorSeveritySchema.parse('Low'),
+            value: 'Low',
+          },
+          {
+            name: 'Moderate',
+            value: 'Moderate',
+          },
+          {
+            name: colorSeveritySchema.parse('Important'),
+            value: 'Important',
+          },
+          {
+            name: colorSeveritySchema.parse('Critical'),
+            value: 'Critical',
+          },
+          new Separator(),
+          {
+            name: 'SKIP',
+            value: '0',
+          },
+          {
+            name: 'EXIT',
+            value: '-1',
+          },
+        ],
+        default: 'Moderate',
+        loop: false,
+      });
+
+      if (answer === '0') {
+        continue;
+      }
+
+      if (answer === '-1') {
+        process.exit(0);
+      }
+
+      severity = answer;
+    }
+
     // If both values are already set, skip setting them
-    if (!setStoryPoints && !setPriority) {
-      logger.log('Both values are already set. Skipping.');
+    if (!setStoryPoints && !setPriority && !setSeverity) {
+      logger.log('Nothing to do. Skipping.');
       continue;
     }
 
@@ -231,9 +290,12 @@ const runProgram = async () => {
     if (setPriority) {
       message.push(`priority to ${priority}`);
     }
+    if (setSeverity) {
+      message.push(`severity to ${severity}`);
+    }
 
     logger.log(`Setting ${message.join(' and ')}`);
-    await jira.setValues(issue.key, priority, storyPoints);
+    await jira.setValues(issue.key, priority, storyPoints, severity);
   }
 };
 
