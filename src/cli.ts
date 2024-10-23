@@ -99,7 +99,7 @@ const runProgram = async () => {
 
   logger.log(`JQL: ${chalk.dim(jira.JQL)}`);
   logger.log(
-    `${chalk.bold(numberOfIssues > 10 ? chalk.red(numberOfIssues) : chalk.yellow(numberOfIssues))} issues are waiting to be sized and prioritized.`
+    `${chalk.bold(numberOfIssues > 10 ? chalk.red(numberOfIssues) : chalk.yellow(numberOfIssues))} issues are waiting to be sized, prioritized, or set severity.`
   );
 
   for (const issue of issues) {
@@ -222,8 +222,6 @@ const runProgram = async () => {
 
       priority = answer;
     }
-
-    console.log(issue.fields[jira.fields.severity]);
 
     // Set severity
     const parsedSeverity = severitySchema.safeParse(
