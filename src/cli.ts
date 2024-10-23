@@ -31,7 +31,7 @@ export function cli(): Command {
     .description(
       '📐 Small CLI tool to set JIRA Story Points, Priority and Severity'
     )
-    .version('1.6.1');
+    .version('1.7.0');
 
   program
     .option(
