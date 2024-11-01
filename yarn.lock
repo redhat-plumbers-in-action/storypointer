@@ -661,9 +661,9 @@ __metadata:
   linkType: hard
 
 "@total-typescript/ts-reset@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "@total-typescript/ts-reset@npm:0.6.0"
-  checksum: 10c0/7bfe874747b5d0c9a13b1bdc01ee27087622d98b19125185ccd9684c80a3b84575009af9be3fbe32e1c50badefa7b93fc1e77169f12e350ca5573128d89c08e2
+  version: 0.6.1
+  resolution: "@total-typescript/ts-reset@npm:0.6.1"
+  checksum: 10c0/c42c592054d33e86ac870065820888f89f05e47b2cfbc6bed95f3084b1f6d13b0231b5b8577eabf461aeb3f37c63ae3216f343b573f7136766eb750aac0dd1ab
   languageName: node
   linkType: hard
 
