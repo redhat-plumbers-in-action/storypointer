@@ -12,7 +12,7 @@ describe('Legend functions', () => {
           Issue Legend:
 
           <TYPE> <ISSUE-KEY> - <STATUS> - <ASSIGNEE>
-          <ISSUE DESCRIPTION>
+          <COMPONENTS> - <ISSUE DESCRIPTION>
           See more: <URL>
 
           <TYPE>:
