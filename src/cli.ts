@@ -230,7 +230,8 @@ const runProgram = async () => {
     let severity = parsedSeverity.success ? parsedSeverity.data : undefined;
     const setSeverity = !severity;
 
-    if (!severity) {
+    // This is workaround, We should use api to determine what values are available on the issue
+    if (!severity && issue.fields.issuetype.name !== 'Story') {
       const answer: SeverityWithControls = await select({
         message: 'Severity',
         choices: [
