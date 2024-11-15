@@ -153,6 +153,7 @@ const runProgram = async () => {
           },
         ],
         default: 3,
+        pageSize: 9,
         loop: false,
       });
 
@@ -209,6 +210,7 @@ const runProgram = async () => {
           },
         ],
         default: 'Normal',
+        pageSize: 8,
         loop: false,
       });
 
