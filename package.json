@@ -35,7 +35,7 @@
     "severity"
   ],
   "dependencies": {
-    "@inquirer/select": "4.0.1",
+    "@inquirer/select": "4.0.2",
     "@total-typescript/ts-reset": "0.6.1",
     "chalk": "5.3.0",
     "commander": "12.1.0",
@@ -44,12 +44,12 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
-    "@types/node": "22.8.7",
-    "@vitest/coverage-v8": "2.1.4",
+    "@types/node": "22.9.0",
+    "@vitest/coverage-v8": "2.1.5",
     "esbuild": "0.24.0",
     "prettier": "3.3.3",
     "ts-node": "10.9.2",
     "typescript": "5.6.3",
-    "vitest": "2.1.4"
+    "vitest": "2.1.5"
   }
 }
