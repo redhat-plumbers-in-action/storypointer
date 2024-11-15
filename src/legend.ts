@@ -6,7 +6,7 @@ export function getLegend() {
     Issue Legend:
 
     <TYPE> <ISSUE-KEY> - ${chalk.bold('<STATUS>')} - ${chalk.italic('<ASSIGNEE>')}
-    ${chalk.italic('<ISSUE DESCRIPTION>')}
+    ${chalk.underline('<COMPONENTS>')} - ${chalk.italic('<ISSUE DESCRIPTION>')}
     See more: ${chalk.italic.underline('<URL>')}
 
     <TYPE>:

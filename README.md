@@ -113,7 +113,7 @@ JQL: Project = RHEL AND ("Story Points" is EMPTY OR priority is EMPTY OR Severit
 5 issues are waiting to be sized, prioritized, or set severity.
 
 🐛 RHEL-1234 - In Progress - Assignee
-Add new feature to curl
+curl - Add new feature to curl
 See more: https://issues.redhat.com/browse/RHEL-1234
 
 ? Story Points
