@@ -106,7 +106,9 @@ const runProgram = async () => {
     logger.log(
       `\n${issueTypeSchema.parse(issue.fields.issuetype.name)} ${issue.key} - ${chalk.bold(issueStatusSchema.parse(issue.fields.status.name))} - ${chalk.italic(issue.fields.assignee?.displayName)}`
     );
-    logger.log(`${chalk.italic(issue.fields.summary)}`);
+    logger.log(
+      `${chalk.underline(issue.fields.components.length > 0 ? issue.fields.components.map(component => component.name).join(', ') : 'NO COMPONENT')} - ${chalk.italic(issue.fields.summary)}`
+    );
     logger.log(
       `See more: ${chalk.italic.underline(jira.getIssueURL(issue.key))}\n`
     );
