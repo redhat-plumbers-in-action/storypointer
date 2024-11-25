@@ -262,15 +262,12 @@ describe('Jira functions', () => {
   });
 
   test('setValues()', async () => {
-    await jira.setValues('RHEL-1234', 'Minor', 5, 'Moderate');
+    await jira.setValues('RHEL-1234', 'Minor', undefined, 5);
 
     expect(mocks.editIssue).toHaveBeenCalledWith({
       issueIdOrKey: 'RHEL-1234',
       fields: {
         customfield_12310243: 5,
-        customfield_12316142: {
-          value: 'Moderate',
-        },
         priority: {
           name: 'Minor',
         },
