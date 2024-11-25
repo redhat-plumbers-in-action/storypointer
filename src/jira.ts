@@ -86,16 +86,20 @@ export class Jira {
   async setValues(
     issue: string,
     priority: Priority,
-    size: Size,
-    severity: Severity
+    severity: Severity,
+    size: Size
   ) {
+    const priorityValue = priority
+      ? { [this.fields.priority]: { name: priority } }
+      : {};
+    const severityValue = severity
+      ? { [this.fields.severity]: { value: severity } }
+      : {};
+    const storyPointsValue = size ? { [this.fields.storyPoints]: size } : {};
+
     const response = await this.api.issues.editIssue({
       issueIdOrKey: issue,
-      fields: {
-        [this.fields.storyPoints]: size,
-        [this.fields.priority]: { name: priority },
-        [this.fields.severity]: { value: severity },
-      },
+      fields: { ...priorityValue, ...severityValue, ...storyPointsValue },
     });
   }
 

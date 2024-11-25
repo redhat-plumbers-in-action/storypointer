@@ -298,7 +298,7 @@ const runProgram = async () => {
     }
 
     logger.log(`Setting ${message.join(' and ')}`);
-    await jira.setValues(issue.key, priority, storyPoints, severity);
+    await jira.setValues(issue.key, priority, severity, storyPoints);
   }
 };
 
