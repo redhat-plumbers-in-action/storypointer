@@ -116,7 +116,7 @@ const runProgram = async () => {
     let storyPoints: Size = issue.fields[jira.fields.storyPoints];
     const setStoryPoints = !storyPoints;
 
-    if (!storyPoints) {
+    if (setStoryPoints) {
       const answer: SizeWithControls = await select({
         message: 'Story Points',
         choices: [
@@ -177,7 +177,7 @@ const runProgram = async () => {
     let priority = parsedPriority.success ? parsedPriority.data : undefined;
     const setPriority = !priority;
 
-    if (!priority) {
+    if (setPriority) {
       const answer: PriorityWithControls = await select({
         message: 'Priority',
         choices: [
@@ -236,7 +236,7 @@ const runProgram = async () => {
 
     // This is workaround, We should use api to determine what values are available on the issue
     if (
-      !severity &&
+      setSeverity &&
       issue.fields.issuetype.name !== 'Story' &&
       issue.fields.issuetype.name !== 'Task'
     ) {
@@ -283,7 +283,7 @@ const runProgram = async () => {
 
       severity = answer;
     } else {
-      setSeverity = !setSeverity;
+      setSeverity != setSeverity;
     }
 
     // If values are already set, skip setting them
