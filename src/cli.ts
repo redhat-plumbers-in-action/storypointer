@@ -232,7 +232,7 @@ const runProgram = async () => {
       issue.fields[jira.fields.severity]?.value
     );
     let severity = parsedSeverity.success ? parsedSeverity.data : undefined;
-    const setSeverity = !severity;
+    let setSeverity = !severity;
 
     // This is workaround, We should use api to determine what values are available on the issue
     if (
@@ -282,6 +282,8 @@ const runProgram = async () => {
       }
 
       severity = answer;
+    } else {
+      setSeverity = !setSeverity;
     }
 
     // If values are already set, skip setting them
