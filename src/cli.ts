@@ -235,7 +235,11 @@ const runProgram = async () => {
     const setSeverity = !severity;
 
     // This is workaround, We should use api to determine what values are available on the issue
-    if (!severity && issue.fields.issuetype.name !== 'Story') {
+    if (
+      !severity &&
+      issue.fields.issuetype.name !== 'Story' &&
+      issue.fields.issuetype.name !== 'Task'
+    ) {
       const answer: SeverityWithControls = await select({
         message: 'Severity',
         choices: [
@@ -280,7 +284,7 @@ const runProgram = async () => {
       severity = answer;
     }
 
-    // If both values are already set, skip setting them
+    // If values are already set, skip setting them
     if (!setStoryPoints && !setPriority && !setSeverity) {
       logger.log('Nothing to do. Skipping.');
       continue;
