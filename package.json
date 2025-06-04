@@ -41,7 +41,7 @@
     "commander": "14.0.0",
     "dotenv": "16.5.0",
     "jira.js": "5.2.0",
-    "zod": "3.25.42"
+    "zod": "3.25.51"
   },
   "devDependencies": {
     "@types/node": "22.15.27",
