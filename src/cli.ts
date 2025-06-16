@@ -36,17 +36,17 @@ export function cli(): Command {
   program
     .option(
       '-c, --component [component]',
-      'Issue component',
+      'Issue component, use `!` to exclude component',
       getDefaultValue('COMPONENT')
     )
     .option(
       '-a, --assignee [assignee]',
-      'Issue assignee',
+      'Issue assignee, use `!` to exclude assignee',
       getDefaultValue('ASSIGNEE')
     )
     .option(
       '-d, --developer [developer]',
-      'Issue developer',
+      'Issue developer, use `!` to exclude developer',
       getDefaultValue('DEVELOPER')
     )
     .option('-j, --jql [jql]', 'JQL query', getDefaultValue('JQL'))

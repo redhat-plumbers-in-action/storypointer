@@ -57,9 +57,11 @@ describe('CLI functions', () => {
 
       Options:
         -V, --version                output the version number
-        -c, --component [component]  Issue component (default: "component")
-        -a, --assignee [assignee]    Issue assignee (default: "username@redhat.com")
-        -d, --developer [developer]  Issue developer
+        -c, --component [component]  Issue component, use \`!\` to exclude component
+                                     (default: "component")
+        -a, --assignee [assignee]    Issue assignee, use \`!\` to exclude assignee
+                                     (default: "username@redhat.com")
+        -d, --developer [developer]  Issue developer, use \`!\` to exclude developer
         -j, --jql [jql]              JQL query
         -l, --legend                 Print legend
         -n, --nocolor                Disable color output (default: false)
