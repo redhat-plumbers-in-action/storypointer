@@ -60,9 +60,9 @@ export class Jira {
   ) {
     this.JQL = this.baseJQL;
     this.JQL += customJQL ? ` AND ${customJQL}` : '';
-    this.JQL += component ? ` AND component = ${component}` : '';
-    this.JQL += assignee ? ` AND assignee = "${assignee}"` : '';
-    this.JQL += developer ? ` AND developer = "${developer}"` : '';
+    this.JQL += this.composeOptionsJQL('component', component);
+    this.JQL += this.composeOptionsJQL('assignee', assignee);
+    this.JQL += this.composeOptionsJQL('developer', developer);
     this.JQL += ' ORDER BY id DESC';
 
     const response = await this.api.issueSearch.searchForIssuesUsingJqlPost({
@@ -101,6 +101,19 @@ export class Jira {
       issueIdOrKey: issue,
       fields: { ...priorityValue, ...severityValue, ...storyPointsValue },
     });
+  }
+
+  composeOptionsJQL(key: string, value: string | undefined): string {
+    if (!value) return '';
+
+    const negated = this.isNegatedInput(value);
+    const formattedValue = negated ? value.slice(1) : value;
+
+    return ` AND ${key} ${negated ? '!=' : '='} "${formattedValue}"`;
+  }
+
+  isNegatedInput(input: string | undefined): boolean {
+    return input?.startsWith('!') ?? false;
   }
 
   getIssueURL(issue: string) {
