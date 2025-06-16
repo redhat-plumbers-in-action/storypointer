@@ -21,7 +21,9 @@ export class Jira {
     this.api = new Version2Client({
       host: instance,
       authentication: {
-        personalAccessToken: apiToken,
+        oauth2: {
+          accessToken: apiToken,
+        },
       },
     });
   }
