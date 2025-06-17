@@ -5,7 +5,7 @@ import { Jira } from '../../src/jira';
 const mocks = vi.hoisted(() => {
   return {
     getServerInfo: vi.fn(),
-    searchForIssuesUsingJqlPost: vi.fn(),
+    searchForIssuesUsingJqlEnhancedSearchPost: vi.fn(),
     editIssue: vi.fn(),
   };
 });
@@ -17,7 +17,8 @@ vi.mock('jira.js', () => {
         getServerInfo: mocks.getServerInfo,
       },
       issueSearch: {
-        searchForIssuesUsingJqlPost: mocks.searchForIssuesUsingJqlPost,
+        searchForIssuesUsingJqlEnhancedSearchPost:
+          mocks.searchForIssuesUsingJqlEnhancedSearchPost,
       },
       issues: {
         editIssue: mocks.editIssue,
@@ -39,7 +40,7 @@ describe('Jira functions', () => {
       version: '8.0.0',
     });
 
-    mocks.searchForIssuesUsingJqlPost.mockReturnValue({
+    mocks.searchForIssuesUsingJqlEnhancedSearchPost.mockReturnValue({
       issues: [
         {
           key: 'RHEL-1234',
@@ -107,7 +108,9 @@ describe('Jira functions', () => {
     expect(jira.JQL).toMatchInlineSnapshot(
       `"issue in (RHEL-1234,RHEL-1235) ORDER BY id DESC"`
     );
-    expect(mocks.searchForIssuesUsingJqlPost).toHaveBeenCalledWith({
+    expect(
+      mocks.searchForIssuesUsingJqlEnhancedSearchPost
+    ).toHaveBeenCalledWith({
       fields: [
         'id',
         'issuetype',
@@ -175,7 +178,9 @@ describe('Jira functions', () => {
     expect(jira.JQL).toMatchInlineSnapshot(
       `"Project in (RHEL, "RHEL Miscellaneous", Fedora) AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed ORDER BY id DESC"`
     );
-    expect(mocks.searchForIssuesUsingJqlPost).toHaveBeenCalledWith({
+    expect(
+      mocks.searchForIssuesUsingJqlEnhancedSearchPost
+    ).toHaveBeenCalledWith({
       fields: [
         'id',
         'issuetype',
