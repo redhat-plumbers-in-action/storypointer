@@ -58,6 +58,7 @@ export class Jira {
     component: string | undefined,
     assignee: string | undefined,
     developer: string | undefined,
+    team: string | undefined,
     customJQL: string | undefined
   ) {
     this.JQL = this.baseJQL;
@@ -65,6 +66,7 @@ export class Jira {
     this.JQL += this.composeOptionsJQL('component', component);
     this.JQL += this.composeOptionsJQL('assignee', assignee);
     this.JQL += this.composeOptionsJQL('developer', developer);
+    this.JQL += this.composeOptionsJQL('AssignedTeam', team);
     this.JQL += ' ORDER BY id DESC';
 
     const response = await this.api.issueSearch.searchForIssuesUsingJqlPost({

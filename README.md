@@ -42,6 +42,7 @@ JIRA_API_TOKEN="exaple-token"
 > # ~/.config/storypointer/.env
 > ASSIGNEE="your-jira-username"
 > DEVELOPER="your-jira-username"
+> TEAM="your-jira-team"
 > COMPONENT="your-component"
 > JQL="your-jql-query"
 > ```
@@ -81,6 +82,7 @@ Options:
   -c, --component [component]  Issue component, use `!` to exclude component
   -a, --assignee [assignee]    Issue assignee, use `!` to exclude assignee (default: "<user-login>@redhat.com")
   -d, --developer [developer]  Issue developer, use `!` to exclude developer
+  -t, --team [team]            Issue AssignedTeam, use `!` to exclude team
   -j, --jql [jql]              JQL query
   -l, --legend                 Print legend
   -n, --nocolor                Disable color output (default: false)

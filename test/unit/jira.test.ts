@@ -169,6 +169,7 @@ describe('Jira functions', () => {
       undefined,
       undefined,
       undefined,
+      undefined,
       undefined
     );
     expect(jira.JQL).toMatchInlineSnapshot(
@@ -230,7 +231,13 @@ describe('Jira functions', () => {
       ]
     `);
 
-    issues = await jira.getIssues('component', undefined, undefined, undefined);
+    issues = await jira.getIssues(
+      'component',
+      undefined,
+      undefined,
+      undefined,
+      undefined
+    );
     expect(jira.JQL).toMatchInlineSnapshot(
       `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND component = "component" ORDER BY id DESC"`
     );
@@ -238,6 +245,7 @@ describe('Jira functions', () => {
     issues = await jira.getIssues(
       'component',
       'assignee',
+      undefined,
       undefined,
       undefined
     );
@@ -249,13 +257,20 @@ describe('Jira functions', () => {
       'component',
       'assignee',
       'developer',
+      'team',
       undefined
     );
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND component = "component" AND assignee = "assignee" AND developer = "developer" ORDER BY id DESC"`
+      `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND component = "component" AND assignee = "assignee" AND developer = "developer" AND AssignedTeam = "team" ORDER BY id DESC"`
     );
 
-    issues = await jira.getIssues(undefined, undefined, undefined, 'customJQL');
+    issues = await jira.getIssues(
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      'customJQL'
+    );
     expect(jira.JQL).toMatchInlineSnapshot(
       `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND customJQL ORDER BY id DESC"`
     );
@@ -264,10 +279,11 @@ describe('Jira functions', () => {
       undefined,
       '!assignee',
       'developer',
+      '!team',
       'customJQL'
     );
     expect(jira.JQL).toMatchInlineSnapshot(
-      `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND customJQL AND assignee != "assignee" AND developer = "developer" ORDER BY id DESC"`
+      `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND customJQL AND assignee != "assignee" AND developer = "developer" AND AssignedTeam != "team" ORDER BY id DESC"`
     );
   });
 

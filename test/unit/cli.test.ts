@@ -62,6 +62,7 @@ describe('CLI functions', () => {
         -a, --assignee [assignee]    Issue assignee, use \`!\` to exclude assignee
                                      (default: "username@redhat.com")
         -d, --developer [developer]  Issue developer, use \`!\` to exclude developer
+        -t, --team [team]            Issue AssignedTeam, use \`!\` to exclude team
         -j, --jql [jql]              JQL query
         -l, --legend                 Print legend
         -n, --nocolor                Disable color output (default: false)

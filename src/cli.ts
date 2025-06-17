@@ -49,6 +49,11 @@ export function cli(): Command {
       'Issue developer, use `!` to exclude developer',
       getDefaultValue('DEVELOPER')
     )
+    .option(
+      '-t, --team [team]',
+      'Issue AssignedTeam, use `!` to exclude team',
+      getDefaultValue('TEAM')
+    )
     .option('-j, --jql [jql]', 'JQL query', getDefaultValue('JQL'))
     .option('-l, --legend', 'Print legend')
     .option(
@@ -92,6 +97,7 @@ const runProgram = async () => {
           options.component,
           options.assignee,
           options.developer,
+          options.team,
           options.jql
         );
 
