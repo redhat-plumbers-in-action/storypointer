@@ -21,7 +21,7 @@ export function isDefaultValuesDisabled(): boolean {
 }
 
 export function getDefaultValue(
-  envName: 'ASSIGNEE' | 'COMPONENT' | 'DEVELOPER' | 'JQL' | 'NOCOLOR'
+  envName: 'ASSIGNEE' | 'COMPONENT' | 'DEVELOPER' | 'TEAM' | 'JQL' | 'NOCOLOR'
 ) {
   if (isDefaultValuesDisabled()) {
     return undefined;
