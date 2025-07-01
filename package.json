@@ -35,7 +35,7 @@
     "severity"
   ],
   "dependencies": {
-    "@inquirer/select": "4.2.3",
+    "@inquirer/select": "4.2.4",
     "@total-typescript/ts-reset": "0.6.1",
     "chalk": "5.4.1",
     "commander": "14.0.0",
