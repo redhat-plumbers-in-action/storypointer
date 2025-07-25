@@ -64,6 +64,7 @@ describe('CLI functions', () => {
         -d, --developer [developer]  Issue developer, use \`!\` to exclude developer
         -t, --team [team]            Issue AssignedTeam, use \`!\` to exclude team
         -j, --jql [jql]              JQL query
+        -f, --filter                 Use a user-defined filter instead of JQL
         -l, --legend                 Print legend
         -n, --nocolor                Disable color output (default: false)
         -h, --help                   display help for command

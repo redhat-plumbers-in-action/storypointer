@@ -1,4 +1,5 @@
 import { Version2Client } from 'jira.js';
+import { Issue } from 'jira.js/dist/esm/types/version2/models';
 
 import { raise } from './util';
 import { Priority, Severity, Size } from './schema/jira';
@@ -54,12 +55,20 @@ export class Jira {
     return response.issues ?? raise('Jira.getIssuesByID(): missing issues.');
   }
 
+  async getIssues(customJQL: string | undefined): Promise<Issue[]>;
   async getIssues(
+    customJQL: string | undefined,
     component: string | undefined,
     assignee: string | undefined,
     developer: string | undefined,
-    team: string | undefined,
-    customJQL: string | undefined
+    team: string | undefined
+  ): Promise<Issue[]>;
+  async getIssues(
+    customJQL?: string | undefined,
+    component?: string | undefined,
+    assignee?: string | undefined,
+    developer?: string | undefined,
+    team?: string | undefined
   ) {
     this.JQL = this.baseJQL;
     this.JQL += customJQL ? ` AND ${customJQL}` : '';
@@ -67,7 +76,9 @@ export class Jira {
     this.JQL += this.composeOptionsJQL('assignee', assignee);
     this.JQL += this.composeOptionsJQL('developer', developer);
     this.JQL += this.composeOptionsJQL('AssignedTeam', team);
-    this.JQL += ' ORDER BY id DESC';
+    // When using a custom JQL or filter, we need to check if the order by is already present (only one order by is allowed)
+    this.JQL +=
+      this.JQL.search(/.*order\s+by/i) === -1 ? ' ORDER BY id DESC' : '';
 
     const response = await this.api.issueSearch.searchForIssuesUsingJqlPost({
       jql: this.JQL,
@@ -101,7 +112,7 @@ export class Jira {
       : {};
     const storyPointsValue = size ? { [this.fields.storyPoints]: size } : {};
 
-    const response = await this.api.issues.editIssue({
+    await this.api.issues.editIssue({
       issueIdOrKey: issue,
       fields: { ...priorityValue, ...severityValue, ...storyPointsValue },
     });
@@ -114,6 +125,13 @@ export class Jira {
     const formattedValue = negated ? value.slice(1) : value;
 
     return ` AND ${key} ${negated ? '!=' : '='} "${formattedValue}"`;
+  }
+
+  async getFilters() {
+    // ! FIXME: replace getFavouriteFilters with getMyFilters() once we migrate to Cloud!
+    const response = await this.api.filters.getFavouriteFilters();
+
+    return response ?? raise('Jira.getFilters(): missing filters.');
   }
 
   isNegatedInput(input: string | undefined): boolean {
