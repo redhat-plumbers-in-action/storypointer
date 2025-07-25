@@ -23,6 +23,8 @@ import {
   SizeWithControls,
 } from './schema/jira';
 
+import { Issue } from 'jira.js/dist/esm/types/version2/models/issue';
+
 export function cli(): Command {
   const program = new Command();
 
@@ -55,6 +57,7 @@ export function cli(): Command {
       getDefaultValue('TEAM')
     )
     .option('-j, --jql [jql]', 'JQL query', getDefaultValue('JQL'))
+    .option('-f, --filter', 'Use a user-defined filter instead of JQL')
     .option('-l, --legend', 'Print legend')
     .option(
       '-n, --nocolor',
@@ -85,21 +88,51 @@ const runProgram = async () => {
   const version = await jira.getVersion();
   console.debug(`JIRA Version: ${version}`);
 
-  const argsParsed = z.array(issueIdSchema).safeParse(program.args);
-  const args = argsParsed.success
-    ? argsParsed.data
-    : raise('Invalid issue key.');
+  let issues: Issue[] = [];
+  if (options.filter) {
+    const filters = await jira.getFilters();
+    const answer = await select({
+      message: 'Select a filter',
+      choices: [
+        ...filters.map((filter, index) => ({
+          name: filter.name,
+          description: filter.jql,
+          value: index,
+        })),
+        new Separator('---'),
+        {
+          name: 'EXIT',
+          value: -1,
+        },
+      ],
+      pageSize: 9,
+      loop: false,
+    });
 
-  const issues =
-    args.length > 0
-      ? await jira.getIssuesByID(args)
-      : await jira.getIssues(
-          options.component,
-          options.assignee,
-          options.developer,
-          options.team,
-          options.jql
-        );
+    if (answer === -1) {
+      process.exit(0);
+    }
+
+    logger.log(`Selected filter: ${filters[answer].jql}`);
+
+    issues = await jira.getIssues(filters[answer].jql);
+  } else {
+    const argsParsed = z.array(issueIdSchema).safeParse(program.args);
+    const args = argsParsed.success
+      ? argsParsed.data
+      : raise('Invalid issue key.');
+
+    const issues =
+      args.length > 0
+        ? await jira.getIssuesByID(args)
+        : await jira.getIssues(
+            options.jql,
+            options.component,
+            options.assignee,
+            options.developer,
+            options.team
+          );
+  }
 
   const numberOfIssues = issues.length;
 

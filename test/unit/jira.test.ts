@@ -232,8 +232,8 @@ describe('Jira functions', () => {
     `);
 
     issues = await jira.getIssues(
-      'component',
       undefined,
+      'component',
       undefined,
       undefined,
       undefined
@@ -243,9 +243,9 @@ describe('Jira functions', () => {
     );
 
     issues = await jira.getIssues(
+      undefined,
       'component',
       'assignee',
-      undefined,
       undefined,
       undefined
     );
@@ -254,37 +254,49 @@ describe('Jira functions', () => {
     );
 
     issues = await jira.getIssues(
+      undefined,
       'component',
       'assignee',
       'developer',
-      'team',
-      undefined
+      'team'
     );
     expect(jira.JQL).toMatchInlineSnapshot(
       `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND component = "component" AND assignee = "assignee" AND developer = "developer" AND AssignedTeam = "team" ORDER BY id DESC"`
     );
 
     issues = await jira.getIssues(
+      'customJQL',
       undefined,
       undefined,
       undefined,
-      undefined,
-      'customJQL'
+      undefined
     );
     expect(jira.JQL).toMatchInlineSnapshot(
       `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND customJQL ORDER BY id DESC"`
     );
 
     issues = await jira.getIssues(
+      'customJQL',
       undefined,
       '!assignee',
       'developer',
-      '!team',
-      'customJQL'
+      '!team'
     );
     expect(jira.JQL).toMatchInlineSnapshot(
       `"Project = RHEL AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed AND customJQL AND assignee != "assignee" AND developer = "developer" AND AssignedTeam != "team" ORDER BY id DESC"`
     );
+  });
+
+  it('does not add "ORDER BY" if it already exists', async () => {
+    await jira.getIssues(
+      'ORDER BY status',
+      undefined,
+      undefined,
+      undefined,
+      undefined
+    );
+    expect(jira.JQL).not.toContain('ORDER BY id DESC');
+    expect(jira.JQL).toContain('ORDER BY status');
   });
 
   test('setValues()', async () => {
