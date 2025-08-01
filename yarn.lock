@@ -2135,7 +2135,7 @@ __metadata:
     ts-node: "npm:10.9.2"
     typescript: "npm:5.8.3"
     vitest: "npm:3.2.4"
-    zod: "npm:3.25.64"
+    zod: "npm:4.0.14"
   bin:
     storypointer: ./dist/main.js
   languageName: unknown
@@ -2587,7 +2587,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:3.25.64, zod@npm:^3.25.63":
+"zod@npm:4.0.14":
+  version: 4.0.14
+  resolution: "zod@npm:4.0.14"
+  checksum: 10c0/ec8681050d393f3be1c2c8f30d7dd4f56bec3746855fb17288be856185a0fe65e68d1b24aec657bbf956f64c05e69332d3751eafd6c103d19385bcc46075612b
+  languageName: node
+  linkType: hard
+
+"zod@npm:^3.25.63":
   version: 3.25.64
   resolution: "zod@npm:3.25.64"
   checksum: 10c0/00d76093a999e377e4ffd037fa7185e861c35917e8c4272f514115c206a0654995168f57fb71708b11e0a9243206d988b7f63b543404e1796402e50d346a6bd7
