@@ -1019,7 +1019,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.9.0":
+"axios@npm:^1.10.0":
   version: 1.11.0
   resolution: "axios@npm:1.11.0"
   dependencies:
@@ -1812,14 +1812,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jira.js@npm:5.2.1":
-  version: 5.2.1
-  resolution: "jira.js@npm:5.2.1"
+"jira.js@npm:5.2.2":
+  version: 5.2.2
+  resolution: "jira.js@npm:5.2.2"
   dependencies:
-    axios: "npm:^1.9.0"
+    axios: "npm:^1.10.0"
     mime: "npm:^4.0.7"
-    zod: "npm:^3.25.63"
-  checksum: 10c0/c733a63ece172d482054afe5fdec34ba4dc1a3a32cb4cfce0f36818a9cd5623f7730f46e79a3d9cf8b12eed563af6d1553b44d78a8b955537ad009dfb84e038d
+    zod: "npm:^3.25.76"
+  checksum: 10c0/de88759e7735859763f6b88ea9f345d9f79905e806f12cbb6f127afd52898698b6baa4959071e800e3961a0d0a417188d4994f84cd4d6bc38a53d83a0bf7fae4
   languageName: node
   linkType: hard
 
@@ -2401,7 +2401,7 @@ __metadata:
     commander: "npm:14.0.0"
     dotenv: "npm:17.0.1"
     esbuild: "npm:0.25.8"
-    jira.js: "npm:5.2.1"
+    jira.js: "npm:5.2.2"
     prettier: "npm:3.6.2"
     ts-node: "npm:10.9.2"
     typescript: "npm:5.8.3"
@@ -2865,9 +2865,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.25.63":
-  version: 3.25.64
-  resolution: "zod@npm:3.25.64"
-  checksum: 10c0/00d76093a999e377e4ffd037fa7185e861c35917e8c4272f514115c206a0654995168f57fb71708b11e0a9243206d988b7f63b543404e1796402e50d346a6bd7
+"zod@npm:^3.25.76":
+  version: 3.25.76
+  resolution: "zod@npm:3.25.76"
+  checksum: 10c0/5718ec35e3c40b600316c5b4c5e4976f7fee68151bc8f8d90ec18a469be9571f072e1bbaace10f1e85cf8892ea12d90821b200e980ab46916a6166a4260a983c
   languageName: node
   linkType: hard
