@@ -37,19 +37,20 @@ export class Jira {
   async getIssuesByID(issues: string[]) {
     this.JQL = `issue in (${issues.join(',')}) ORDER BY id DESC`;
 
-    const response = await this.api.issueSearch.searchForIssuesUsingJqlPost({
-      jql: this.JQL,
-      fields: [
-        'id',
-        'issuetype',
-        'status',
-        'components',
-        'summary',
-        'assignee',
-        this.fields.storyPoints,
-        this.fields.priority,
-      ],
-    });
+    const response =
+      await this.api.issueSearch.searchForIssuesUsingJqlEnhancedSearchPost({
+        jql: this.JQL,
+        fields: [
+          'id',
+          'issuetype',
+          'status',
+          'components',
+          'summary',
+          'assignee',
+          this.fields.storyPoints,
+          this.fields.priority,
+        ],
+      });
 
     // TODO: if no issues found dont fail
     return response.issues ?? raise('Jira.getIssuesByID(): missing issues.');
@@ -80,19 +81,20 @@ export class Jira {
     this.JQL +=
       this.JQL.search(/.*order\s+by/i) === -1 ? ' ORDER BY id DESC' : '';
 
-    const response = await this.api.issueSearch.searchForIssuesUsingJqlPost({
-      jql: this.JQL,
-      fields: [
-        'id',
-        'issuetype',
-        'status',
-        'components',
-        'summary',
-        'assignee',
-        this.fields.storyPoints,
-        this.fields.priority,
-      ],
-    });
+    const response =
+      await this.api.issueSearch.searchForIssuesUsingJqlEnhancedSearchPost({
+        jql: this.JQL,
+        fields: [
+          'id',
+          'issuetype',
+          'status',
+          'components',
+          'summary',
+          'assignee',
+          this.fields.storyPoints,
+          this.fields.priority,
+        ],
+      });
 
     // TODO: if no issues found dont fail
     return response.issues ?? raise('Jira.getIssues(): missing issues.');
