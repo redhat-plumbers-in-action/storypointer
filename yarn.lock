@@ -1149,10 +1149,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:14.0.0":
-  version: 14.0.0
-  resolution: "commander@npm:14.0.0"
-  checksum: 10c0/73c4babfa558077868d84522b11ef56834165d472b9e86a634cd4c3ae7fc72d59af6377d8878e06bd570fe8f3161eced3cbe383c38f7093272bb65bd242b595b
+"commander@npm:14.0.2":
+  version: 14.0.2
+  resolution: "commander@npm:14.0.2"
+  checksum: 10c0/245abd1349dbad5414cb6517b7b5c584895c02c4f7836ff5395f301192b8566f9796c82d7bd6c92d07eba8775fe4df86602fca5d86d8d10bcc2aded1e21c2aeb
   languageName: node
   linkType: hard
 
@@ -2398,7 +2398,7 @@ __metadata:
     "@types/node": "npm:24.6.1"
     "@vitest/coverage-v8": "npm:3.2.4"
     chalk: "npm:5.6.0"
-    commander: "npm:14.0.0"
+    commander: "npm:14.0.2"
     dotenv: "npm:17.2.3"
     esbuild: "npm:0.27.0"
     jira.js: "npm:5.2.2"
