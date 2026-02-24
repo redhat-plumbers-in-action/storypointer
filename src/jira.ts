@@ -1,15 +1,15 @@
-import { Version2Client } from 'jira.js';
-import { Issue } from 'jira.js/dist/esm/types/version2/models';
+import { Version3Client } from 'jira.js';
+import { Issue } from 'jira.js/dist/esm/types/version3/models/issue';
 
 import { raise } from './util';
 import { Priority, Severity, Size } from './schema/jira';
 
 export class Jira {
-  readonly api: Version2Client;
+  readonly api: Version3Client;
   readonly fields = {
-    storyPoints: 'customfield_12310243',
+    storyPoints: 'customfield_10194',
     priority: 'priority',
-    severity: 'customfield_12316142',
+    severity: 'customfield_10442',
   };
   readonly baseJQL =
     'Project in (RHEL, "RHEL Miscellaneous", Fedora) AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed';
@@ -17,13 +17,15 @@ export class Jira {
 
   constructor(
     readonly instance: string,
-    apiToken: string
+    apiToken: string,
+    email: string
   ) {
-    this.api = new Version2Client({
+    this.api = new Version3Client({
       host: instance,
       authentication: {
-        oauth2: {
-          accessToken: apiToken,
+        basic: {
+          email,
+          apiToken,
         },
       },
     });
