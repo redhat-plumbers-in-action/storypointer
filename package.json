@@ -35,19 +35,19 @@
     "severity"
   ],
   "dependencies": {
-    "@inquirer/select": "4.3.2",
+    "@inquirer/select": "5.1.0",
     "@total-typescript/ts-reset": "0.6.1",
-    "chalk": "5.6.0",
-    "commander": "14.0.0",
-    "dotenv": "17.2.3",
-    "jira.js": "5.2.2",
-    "zod": "4.1.11"
+    "chalk": "5.6.2",
+    "commander": "14.0.3",
+    "dotenv": "17.3.1",
+    "jira.js": "5.3.0",
+    "zod": "4.3.6"
   },
   "devDependencies": {
-    "@types/node": "24.6.1",
+    "@types/node": "25.3.0",
     "@vitest/coverage-v8": "3.2.4",
-    "esbuild": "0.27.0",
-    "prettier": "3.6.2",
+    "esbuild": "0.27.3",
+    "prettier": "3.8.1",
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
     "vitest": "3.2.4"
