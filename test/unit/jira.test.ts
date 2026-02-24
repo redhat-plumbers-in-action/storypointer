@@ -11,7 +11,7 @@ const mocks = vi.hoisted(() => {
 });
 
 vi.mock('jira.js', () => {
-  const Version2Client = vi.fn(() => {
+  const Version2Client = vi.fn(function () {
     return {
       serverInfo: {
         getServerInfo: mocks.getServerInfo,
