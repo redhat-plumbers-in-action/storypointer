@@ -11,7 +11,7 @@ const mocks = vi.hoisted(() => {
 });
 
 vi.mock('jira.js', () => {
-  const Version2Client = vi.fn(function () {
+  const Version3Client = vi.fn(function () {
     return {
       serverInfo: {
         getServerInfo: mocks.getServerInfo,
@@ -26,7 +26,7 @@ vi.mock('jira.js', () => {
     };
   });
   return {
-    Version2Client,
+    Version3Client,
   };
 });
 
@@ -34,7 +34,7 @@ describe('Jira functions', () => {
   let jira: Jira;
 
   beforeEach(() => {
-    jira = new Jira('https://issues.redhat.com', 'token');
+    jira = new Jira('https://issues.redhat.com', 'token', 'email');
 
     mocks.getServerInfo.mockReturnValue({
       version: '8.0.0',
@@ -118,7 +118,7 @@ describe('Jira functions', () => {
         'components',
         'summary',
         'assignee',
-        'customfield_12310243',
+        'customfield_10194',
         'priority',
       ],
       jql: 'issue in (RHEL-1234,RHEL-1235) ORDER BY id DESC',
@@ -130,7 +130,7 @@ describe('Jira functions', () => {
             "assignee": {
               "displayName": "assignee",
             },
-            "customfield_12310243": 3,
+            "customfield_10194": 3,
             "issuetype": {
               "name": "Story",
             },
@@ -149,7 +149,7 @@ describe('Jira functions', () => {
             "assignee": {
               "displayName": "assignee",
             },
-            "customfield_12310243": 5,
+            "customfield_10194": 5,
             "issuetype": {
               "name": "Story",
             },
@@ -188,7 +188,7 @@ describe('Jira functions', () => {
         'components',
         'summary',
         'assignee',
-        'customfield_12310243',
+        'customfield_10194',
         'priority',
       ],
       jql: 'Project in (RHEL, "RHEL Miscellaneous", Fedora) AND (type in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY) OR type not in (Story, Task) AND ("Story Points" is EMPTY OR priority is EMPTY OR Severity is EMPTY)) AND status != Closed ORDER BY id DESC',
@@ -200,7 +200,7 @@ describe('Jira functions', () => {
             "assignee": {
               "displayName": "assignee",
             },
-            "customfield_12310243": 3,
+            "customfield_10194": 3,
             "issuetype": {
               "name": "Story",
             },
@@ -219,7 +219,7 @@ describe('Jira functions', () => {
             "assignee": {
               "displayName": "assignee",
             },
-            "customfield_12310243": 5,
+            "customfield_10194": 5,
             "issuetype": {
               "name": "Story",
             },
@@ -310,7 +310,7 @@ describe('Jira functions', () => {
     expect(mocks.editIssue).toHaveBeenCalledWith({
       issueIdOrKey: 'RHEL-1234',
       fields: {
-        customfield_12310243: 5,
+        customfield_10194: 5,
         priority: {
           name: 'Minor',
         },

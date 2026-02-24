@@ -6,7 +6,13 @@ import { z } from 'zod';
 import { Jira } from './jira';
 import { getLegend } from './legend';
 import { Logger } from './logger';
-import { getDefaultValue, getOptions, raise, tokenUnavailable } from './util';
+import {
+  getDefaultValue,
+  getOptions,
+  raise,
+  tokenUnavailable,
+  getUserFromLogin,
+} from './util';
 
 import {
   colorPrioritySchema,
@@ -23,7 +29,7 @@ import {
   SizeWithControls,
 } from './schema/jira';
 
-import { Issue } from 'jira.js/dist/esm/types/version2/models/issue';
+import { Issue } from 'jira.js/dist/esm/types/version3/models/issue';
 
 export function cli(): Command {
   const program = new Command();
@@ -83,7 +89,11 @@ const runProgram = async () => {
   }
 
   const token = process.env.JIRA_API_TOKEN ?? tokenUnavailable();
-  const jira = new Jira('https://issues.redhat.com', token);
+  const jira = new Jira(
+    'https://redhat.atlassian.net/jira',
+    token,
+    getUserFromLogin()
+  );
 
   const version = await jira.getVersion();
   console.debug(`JIRA Version: ${version}`);
