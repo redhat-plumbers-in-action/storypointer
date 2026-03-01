@@ -834,14 +834,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.13.3":
-  version: 1.13.5
-  resolution: "axios@npm:1.13.5"
+"axios@npm:^1.13.5":
+  version: 1.13.6
+  resolution: "axios@npm:1.13.6"
   dependencies:
     follow-redirects: "npm:^1.15.11"
     form-data: "npm:^4.0.5"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10c0/abf468c34f2d145f3dc7dbc0f1be67e520630624307bda69a41bbe8d386bd672d87b4405c4ee77f9ff54b235ab02f96a9968fb00e75b13ce64706e352a3068fd
+  checksum: 10c0/51fb5af055c3b85662fa97df17d986ae2c37d13bf86d50b6bb36b6b3a2dec6966a1d3a14ab3774b71707b155ae3597ed9b7babdf1a1a863d1a31840cb8e7ec71
   languageName: node
   linkType: hard
 
@@ -1540,14 +1540,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jira.js@npm:5.3.0":
-  version: 5.3.0
-  resolution: "jira.js@npm:5.3.0"
+"jira.js@npm:5.3.1":
+  version: 5.3.1
+  resolution: "jira.js@npm:5.3.1"
   dependencies:
-    axios: "npm:^1.13.3"
-    mime: "npm:^4.1.0"
+    axios: "npm:^1.13.5"
+    mime-types: "npm:^2.1.35"
     zod: "npm:^4.3.6"
-  checksum: 10c0/354da73edb86b1edef035eefed543d6b4709b7e3ab2c544e86b6adc4f2d0eda016d1eac9bca5dd358103de957d01f2e5e4acbdbb7caa4db9d98e14c16f4a3b11
+  checksum: 10c0/1ef4399e0d631740770f21a2fbac05a110f058e453fa83e8a123590899a9a6ca9902c8c459292c91f8ec72165533f6e65207f0dfd6713f05bfe4146931a3d911
   languageName: node
   linkType: hard
 
@@ -1641,21 +1641,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime-types@npm:^2.1.12":
+"mime-types@npm:^2.1.12, mime-types@npm:^2.1.35":
   version: 2.1.35
   resolution: "mime-types@npm:2.1.35"
   dependencies:
     mime-db: "npm:1.52.0"
   checksum: 10c0/82fb07ec56d8ff1fc999a84f2f217aa46cb6ed1033fefaabd5785b9a974ed225c90dc72fff460259e66b95b73648596dbcc50d51ed69cdf464af2d237d3149b2
-  languageName: node
-  linkType: hard
-
-"mime@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "mime@npm:4.1.0"
-  bin:
-    mime: bin/cli.js
-  checksum: 10c0/3b8602e50dff1049aea8bb2d4c65afc55bf7f3eb5c17fd2bcb315b8c8ae225a7553297d424d3621757c24cdba99e930ecdc4108467009cdc7ed55614cd55031d
   languageName: node
   linkType: hard
 
@@ -2144,7 +2135,7 @@ __metadata:
     commander: "npm:14.0.3"
     dotenv: "npm:17.3.1"
     esbuild: "npm:0.27.3"
-    jira.js: "npm:5.3.0"
+    jira.js: "npm:5.3.1"
     prettier: "npm:3.8.1"
     ts-node: "npm:10.9.2"
     typescript: "npm:5.9.3"
